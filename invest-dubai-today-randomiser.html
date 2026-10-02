@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invest Dubai Today Randomiser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1120; --panel:#121a2d; --panel2:#182239; --line:#25314c;
+  --ink:#eef1f7; --mute:#8d98b3;
+  --in:#ff9f43; --in2:#ffc48a;      /* India side */
+  --db:#e2b86b; --db2:#f5dcaa;      /* Dubai side */
+  --teal:#3fc1b0; --rose:#ef7a6b; --violet:#9b8cff; --sky:#5aa9ff;
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;min-height:100vh;
+  background-image:radial-gradient(900px 480px at 100% -10%,rgba(226,184,107,.18),transparent 60%),
+  radial-gradient(900px 480px at 0% -10%,rgba(255,159,67,.13),transparent 60%);}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 80px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:-.01em}
+.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--db)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;border-radius:22px;overflow:hidden;border:1px solid var(--line);margin-bottom:14px;position:relative}
+.side{padding:26px 26px 22px;min-height:210px;display:flex;flex-direction:column;justify-content:space-between}
+.side.in{background:linear-gradient(150deg,rgba(255,159,67,.22),rgba(255,159,67,.03))}
+.side.db{background:linear-gradient(210deg,rgba(226,184,107,.26),rgba(226,184,107,.03));text-align:right}
+.side .kicker{color:var(--mute)}
+.side h1{font-size:clamp(28px,4.4vw,50px);line-height:1.02;margin-top:6px}
+.side.in h1{color:var(--in2)} .side.db h1{color:var(--db2)}
+.side p{color:#c9d0e2;font-size:13px;margin-top:10px}
+.cities{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.side.db .cities{justify-content:flex-end}
+.cities span{font-size:12px;padding:3px 9px;border-radius:99px;border:1px solid var(--line);background:rgba(11,17,32,.5);color:#c9d0e2}
+.vs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:var(--bg);border:2px solid var(--db);display:grid;place-items:center;font:700 22px Fraunces,serif;color:var(--db);box-shadow:0 0 0 8px rgba(11,17,32,.6)}
+.brandbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;margin-bottom:22px}
+.brand{font:700 18px Fraunces,serif}
+.brand span{color:var(--db)}
+.today{color:var(--mute);font-size:13px}
+.today b{color:var(--db)}
+
+/* Formula */
+.formula{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin-bottom:12px}
+.fx{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.fx .t{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.fx p{font-size:13px;color:#c9d0e2;margin-top:4px}
+.fx.a{border-top:3px solid var(--in)} .fx.a .t{color:var(--in)}
+.fx.b{border-top:3px solid var(--db)} .fx.b .t{color:var(--db)}
+.fx.c{border-top:3px solid var(--teal)} .fx.c .t{color:var(--teal)}
+.op{display:grid;place-items:center;font:700 26px Fraunces,serif;color:var(--mute)}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.chk{font-size:13px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel)}
+.chk b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
+.chk.s b{color:var(--rose)} .chk.k b{color:var(--sky)}
+
+/* Rotation */
+.rot{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:22px}
+.day{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-size:12px;color:var(--mute);transition:.2s}
+.day .n{font-weight:600;color:var(--ink);font-size:13px}
+.day .a{margin-top:4px;font-family:"JetBrains Mono",monospace}
+.day.on{background:linear-gradient(160deg,rgba(226,184,107,.25),rgba(226,184,107,.05));border-color:var(--db);color:var(--db2);transform:translateY(-3px)}
+.day.on .n{color:var(--db)}
+
+/* Controls */
+.ctrl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:18px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button,.num button{background:var(--panel2);color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:7px 13px;font:500 13px Inter,sans-serif;cursor:pointer}
+.seg button.on{color:#1d1406;background:var(--db);border-color:var(--db)}
+.num{display:flex;align-items:center;gap:8px}
+.num output{min-width:22px;text-align:center;font-weight:600}
+.go{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:11px 18px;font:600 14px Inter,sans-serif;cursor:pointer;transition:.15s}
+.btn.p{background:linear-gradient(90deg,var(--in),var(--db));color:#1d1406;box-shadow:0 6px 24px rgba(226,184,107,.3)}
+.btn.p:hover{transform:translateY(-1px)}
+.btn.g{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.lbl{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.1em;margin-right:4px}
+.mix{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--panel2);margin-bottom:8px}
+.mix i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--mute);margin-bottom:20px}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:44px}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;animation:rise .45s ease both;display:flex;flex-direction:column}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.card.risk{border-color:rgba(239,122,107,.45)}
+.face{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.face .l,.face .r{padding:14px 14px 12px}
+.face .l{background:linear-gradient(150deg,rgba(255,159,67,.2),rgba(255,159,67,.02))}
+.face .r{background:linear-gradient(210deg,rgba(226,184,107,.22),rgba(226,184,107,.02));text-align:right}
+.face small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.face .l b{color:var(--in2);font:700 17px Fraunces,serif}
+.face .r b{color:var(--db2);font:700 17px Fraunces,serif}
+.face .city{font-size:12px;color:var(--mute)}
+.face .x{font:700 13px Fraunces,serif;color:var(--mute);padding:0 6px}
+.budget{text-align:center;font:600 12px "JetBrains Mono",monospace;color:var(--ink);background:var(--panel2);padding:5px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.body{padding:16px 18px 16px;display:flex;flex-direction:column;flex:1}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.idx{font-family:Fraunces,serif;font-size:28px;color:var(--c);line-height:1}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tag{font-size:11px;padding:3px 9px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);color:var(--mute)}
+.tag.lead{color:var(--db);border-color:rgba(226,184,107,.5)}
+.tag.fresh{color:var(--teal);border-color:rgba(63,193,176,.5)}
+.tag.risk{color:#ffb3a8;border-color:rgba(239,122,107,.55)}
+.angle{font-family:Fraunces,serif;font-size:20px;line-height:1.2;margin-bottom:6px}
+.topic{color:#c9d0e2;margin-bottom:12px;font-size:14px}
+.belief{font-size:13px;padding:8px 12px;border-radius:10px;background:rgba(255,159,67,.08);border-left:3px solid var(--in);color:var(--in2);margin-bottom:12px}
+.belief.fear{background:rgba(155,140,255,.08);border-left-color:var(--violet);color:#cfc7ff}
+.riskline{font-size:13px;padding:8px 12px;border-radius:10px;background:rgba(239,122,107,.1);border-left:3px solid var(--rose);color:#ffc0b6;margin-bottom:12px}
+.kv{display:grid;grid-template-columns:70px 1fr;gap:6px 10px;font-size:13px;border-top:1px dashed var(--line);padding-top:12px}
+.kv dt{color:var(--mute)}
+.act{display:flex;gap:8px;margin-top:auto;padding-top:14px}
+.act button{flex:1;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px;font:500 12px Inter,sans-serif;cursor:pointer}
+.act button:hover{border-color:var(--db);color:var(--db)}
+
+/* Reference */
+h2{font-size:26px;margin-bottom:6px}
+.sub{color:var(--mute);margin-bottom:18px;font-size:14px}
+.readers{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:16px}
+.rd{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;font-size:14px}
+.rd .k{font:700 22px Fraunces,serif;color:var(--db);margin-right:6px}
+.bf{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:44px}
+.bf .box h3{font-size:16px;margin-bottom:8px}
+.bf .box.b h3{color:var(--in)} .bf .box.f h3{color:#cfc7ff}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pills span{font-size:13px;padding:5px 11px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);color:#c9d0e2}
+.buckets{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-bottom:44px}
+.bk{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;border-top:3px solid var(--c)}
+.bk h3{font-size:17px;margin-bottom:10px}
+.bk h3 span{color:var(--c);margin-right:6px}
+.bk li{list-style:none;font-size:13px;color:#c9d0e2;padding:5px 0;border-bottom:1px solid rgba(37,49,76,.6)}
+.bk li:last-child{border:0}
+.angles{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:44px}
+.ang{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:10px;align-items:baseline}
+.ang .k{font-family:Fraunces,serif;font-size:22px;color:var(--mute);min-width:26px}
+.ang.on{border-color:var(--db);background:linear-gradient(160deg,rgba(226,184,107,.18),transparent)}
+.ang.on .k{color:var(--db)}
+.spec{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.box ol{padding-left:20px;font-size:14px;color:#c9d0e2}
+.box ol li{padding:4px 0}
+.box ol b{color:var(--ink)}
+.box ol li.i b{color:var(--in)} .box ol li.d b{color:var(--db)}
+.box ul{list-style:none;font-size:14px;color:#c9d0e2}
+.box ul li{padding:5px 0 5px 18px;position:relative}
+.box ul li:before{content:"";position:absolute;left:0;top:12px;width:8px;height:2px;background:var(--rose)}
+.ban{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.ban span{font-size:12px;padding:3px 9px;border-radius:6px;background:rgba(239,122,107,.1);color:#ffb3a8;text-decoration:line-through}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--db);color:#1d1406;padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;transition:.3s;z-index:9}
+.toast.on{transform:translateX(-50%) translateY(0)}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}.side.db{text-align:left}.side.db .cities{justify-content:flex-start}
+  .vs{top:50%;left:auto;right:20px;width:56px;height:56px;font-size:17px}
+  .formula{grid-template-columns:1fr}.op{padding:2px 0}
+  .checks,.bf,.spec{grid-template-columns:1fr}
+  .rot{grid-template-columns:repeat(4,1fr)}
+  .go{margin-left:0;width:100%}.go .btn{flex:1}
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <div class="brand">Invest <span>Dubai</span> Today · <span style="color:var(--mute);font:500 14px Inter">daily idea randomiser</span></div>
+    <div class="today" id="today"></div>
+  </div>
+
+  <section class="hero">
+    <div class="side in">
+      <div><div class="kicker">What they hold</div><h1>Your next ₹ crore<br>in India</h1>
+      <p>Safe, familiar, appreciates over time. Or so the belief goes.</p></div>
+      <div class="cities"><span>Mumbai</span><span>Bengaluru</span><span>Gurugram</span><span>Noida</span><span>Pune</span><span>Hyderabad</span></div>
+    </div>
+    <div class="side db">
+      <div><div class="kicker">What we argue</div><h1>Or the same money<br>in Dubai</h1>
+      <p>Every idea makes this case from a fresh angle.</p></div>
+      <div class="cities"><span>Dubai</span><span>Abu Dhabi</span><span>Ras Al Khaimah</span></div>
+    </div>
+    <div class="vs">vs</div>
+  </section>
+
+  <div class="formula">
+    <div class="fx a"><div class="t">Indian belief or benchmark</div><p>The city, price or habit being challenged</p></div>
+    <div class="op">+</div>
+    <div class="fx b"><div class="t">Dubai counterpoint</div><p>A named community, a number, a rule</p></div>
+    <div class="op">=</div>
+    <div class="fx c"><div class="t">One aha</div><p>The reader rethinks where ₹1-10 crore goes</p></div>
+  </div>
+  <div class="checks">
+    <div class="chk s"><b>Self-check</b>If the post does not make an India-based buyer weigh Dubai against an Indian city, rewrite it.</div>
+    <div class="chk k"><b>Credibility rule</b>About 1 in 5 ideas names a real Dubai risk or cost and shows how informed buyers manage it.</div>
+  </div>
+
+  <div class="rot" id="rot"></div>
+
+  <div class="ctrl">
+    <span class="lbl">Bucket</span>
+    <div class="seg" id="seg"></div>
+    <div class="num"><span class="lbl">Ideas</span><button id="minus">−</button><output id="count">5</output><button id="plus">+</button></div>
+    <div class="go"><button class="btn g" id="copyAll">Copy batch prompt</button><button class="btn p" id="roll">Randomise</button></div>
+  </div>
+
+  <div class="mix" id="mix"></div>
+  <div class="legend" id="legend"></div>
+  <div class="grid" id="out"></div>
+
+  <h2>Who reads this</h2>
+  <p class="sub">India residents, not NRIs.</p>
+  <div class="readers" id="readers"></div>
+  <div class="bf">
+    <div class="box b"><h3>What they believe about Indian property</h3><div class="pills" id="beliefs"></div></div>
+    <div class="box f"><h3>What they fear about Dubai</h3><div class="pills" id="fears"></div></div>
+  </div>
+
+  <h2>Topic universe</h2>
+  <p class="sub">Seed topics only. At least 2 in 5 ideas come from outside this list (marked Fresh).</p>
+  <div class="buckets" id="buckets"></div>
+
+  <h2>Angle library</h2>
+  <p class="sub">Gold tiles are today's lead angles. At least 3 in 5 ideas use them.</p>
+  <div class="angles" id="angles"></div>
+
+  <h2>Output and rules</h2>
+  <p class="sub">Ten fields per idea.</p>
+  <div class="spec">
+    <div class="box"><ol>
+      <li><b>Hook</b> max 12 words</li>
+      <li><b>Sub-line</b> max 15 words</li>
+      <li class="i"><b>Indian benchmark</b> the city or belief being challenged</li>
+      <li><b>The aha</b> one sentence the reader did not expect</li>
+      <li class="d"><b>Dubai case</b> why this points the money to Dubai</li>
+      <li><b>Proof point</b> source, or [VERIFY: what to check]</li>
+      <li><b>Reader + objection</b> or belief it hits</li>
+      <li><b>Angle + bucket</b></li>
+      <li><b>Format</b> LinkedIn post, carousel, Reel hook, X thread, data card</li>
+      <li><b>CTA</b> one line that earns the click</li>
+    </ol></div>
+    <div class="box"><ul>
+      <li>Never invent numbers, deals, names or quotes</li>
+      <li>No guaranteed, risk-free or best investment</li>
+      <li>Celebrity items: publicly reported deals only</li>
+      <li>Name Indian micro-markets and Dubai communities. Net over gross</li>
+      <li>Never hide downsides</li>
+      <li>Drop anything an Indian HNI would call obvious</li>
+    </ul><div class="ban" id="ban"></div></div>
+  </div>
+</div>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+const BUCKETS={
+  A:{name:"Head-to-head",c:"var(--in)",topics:[
+    "ROI: Indian metros vs Dubai, Abu Dhabi, RAK",
+    "Rental yield: Indian metro flat vs Dubai flat at the same budget",
+    "What the same budget buys in an Indian micro-market vs a named Dubai community",
+    "Transaction costs: Indian stamp duty and registration vs Dubai DLD fees",
+    "Holding costs: Indian maintenance and property tax vs Dubai service charges",
+    "Construction delays: Indian project timelines vs Dubai escrow-backed off-plan",
+    "Rent collection, tenant laws and eviction: India vs Dubai",
+    "Currency: rupee-held asset vs a dollar-pegged dirham asset"],
+    fresh:["Carpet area vs Dubai's sellable area: what you actually get per rupee",
+      "Parking, clubhouse and amenity charges in Indian projects vs what Dubai bundles",
+      "Resale time: how long a flat sits in an Indian micro-market vs a Dubai community",
+      "Rent agreements: India's 11-month habit vs Dubai's Ejari-registered lease"]},
+  B:{name:"Who from India is buying",c:"var(--db)",topics:[
+    "Indian celebrities, cricketers, business families with Dubai property",
+    "Indian-origin developers building Dubai",
+    "Indians' rank among Dubai's foreign buyers",
+    "Which Indian cities send the most Dubai buyers",
+    "Family offices shifting from Indian to UAE property"],
+    fresh:["Bengaluru tech founders buying Dubai after a liquidity event",
+      "Tier-2 Indian business families (Surat, Ludhiana, Coimbatore) buying Dubai",
+      "Indian doctors adding a Dubai unit instead of a third Indian flat",
+      "Indian developers' own promoters buying in Dubai"]},
+  C:{name:"Objections, answered",c:"var(--violet)",topics:[
+    "Can an Indian resident legally buy in Dubai? (LRS)",
+    "How do I send money and get it back?",
+    "Is Dubai a bubble? What 2008-09 actually did",
+    "Who manages my flat while I'm in Bengaluru?",
+    "How is Dubai rent and resale taxed in India?",
+    "Golden Visa: what owning Dubai property can get an Indian family"],
+    fresh:["Can I buy Dubai property jointly with my spouse under two LRS limits?",
+      "What happens to my Dubai flat if I die without a UAE-registered will?",
+      "Can I see the flat before paying, or is a video tour enough?",
+      "Will my Indian CA know how to report a Dubai property?"]},
+  D:{name:"Dubai explained for Indians",c:"var(--sky)",topics:[
+    "Off-plan payment plans vs Indian construction-linked plans",
+    "Community spotlights compared to their Indian equivalents",
+    "Developer report cards vs Indian developers' track records",
+    "Branded residences: Dubai price vs comparable Indian luxury",
+    "Dubai REITs vs Indian REITs for those who don't want a flat",
+    "Big UAE real estate news decoded for Indian buyers"],
+    fresh:["Dubai's freehold zones explained to someone used to Indian leasehold land",
+      "Handover in Dubai vs possession in India: what each actually includes",
+      "Dubai Metro corridors vs Bengaluru and Mumbai metro-led price jumps",
+      "Snagging in Dubai vs the punch list Indian buyers never get"]},
+  E:{name:"Insider and trade",c:"var(--rose)",topics:[
+    "What Indian brokers now tell clients about Dubai",
+    "Questions Indian buyers ask most before their first Dubai purchase",
+    "Mistakes Indians make on their first Dubai buy",
+    "Indian buying habits in Dubai: vastu, festive launches, community clustering",
+    "Playbooks"],
+    fresh:["Why Indian channel partners now push Dubai launches at Indian roadshows",
+      "What a Dubai developer's Mumbai or Delhi roadshow actually offers",
+      "The Indian broker who lost a client to Dubai: what changed the client's mind",
+      "Dhanteras and Akshaya Tritiya launches by Dubai developers"]}
+};
+const ANGLES=["","The number nobody quotes","Myth vs reality","Side-by-side with a surprising winner","What insiders know","Contrarian take, one fact as proof","Hidden cost or hidden rule","Follow the money","Then vs now (5 or 10 years apart)","The mistake smart people make","One deal, decoded","₹1 crore in 2016: Indian city vs Dubai today","Who is buying, who is selling","The question clients ask brokers most","Ranking or league table"];
+const ROT=[[8,14],[1,6],[3,11],[7,12],[2,9],[4,10],[5,13]];
+const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const INDIA=[["Worli","Mumbai"],["Bandra West","Mumbai"],["Powai","Mumbai"],["Whitefield","Bengaluru"],["Sarjapur Road","Bengaluru"],["Hebbal","Bengaluru"],["Golf Course Road","Gurugram"],["Dwarka Expressway","Gurugram"],["Noida Expressway","Noida"],["Hinjewadi","Pune"],["Kharadi","Pune"],["Gachibowli","Hyderabad"],["Kokapet","Hyderabad"]];
+const DUBAI=[["Downtown Dubai","Dubai"],["Dubai Marina","Dubai"],["JVC","Dubai"],["Business Bay","Dubai"],["Dubai Hills Estate","Dubai"],["Dubai Creek Harbour","Dubai"],["Dubai South","Dubai"],["Arjan","Dubai"],["Palm Jumeirah","Dubai"],["Al Furjan","Dubai"],["Sobha Hartland","Dubai"],["JLT","Dubai"],["Saadiyat Island","Abu Dhabi"],["Yas Island","Abu Dhabi"],["Al Marjan Island","Ras Al Khaimah"]];
+const BUDGET=["₹1 crore","₹2 crore","₹5 crore","₹10 crore"];
+const READERS=["HNIs and business owners in Indian metros holding 2-3 Indian properties","Senior professionals (CXOs, founders, doctors) buying their second flat","First-time global investors who have never bought outside India","Indian brokers, wealth advisors and power brokers steering these buyers"];
+const RSHORT=["Metro HNI with 2-3 flats","CXO / founder / doctor, second flat","First-time global investor","Indian broker or wealth advisor"];
+const BELIEFS=["Indian property is safe","Indian property is familiar","Indian property appreciates over time"];
+const FEARS=["Is buying abroad legal?","Can I get my money out?","Is Dubai a bubble?","Who manages the flat from India?","How is it taxed back home?","Am I being sold to?"];
+const RISKS=["Oversupply in the pipeline","Service charges","Indian tax on Dubai rent","Managing from a distance"];
+const FMT=["LinkedIn post","Carousel","Reel hook","X thread","Data card"];
+const BANNED=["unlock","game-changer","delve","landscape","navigate","elevate","seamless","robust","leverage","journey","realm","testament","revolutionize"];
+
+const now=new Date(),dow=now.getDay(),LEAD=ROT[dow];
+let bucket="All",count=5,batch=[];
+const $=id=>document.getElementById(id);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function hist(){try{return JSON.parse(localStorage.getItem("idt_hist")||"[]")}catch(e){return[]}}
+function saveHist(it){try{const cut=Date.now()-7*864e5;localStorage.setItem("idt_hist",JSON.stringify(hist().filter(x=>x.t>cut).concat(it.map(i=>({k:i.topic+"|"+i.angle,t:Date.now()})))))}catch(e){}}
+
+const dateStr=now.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+$("today").innerHTML=`${dateStr} · lead angles <b>${LEAD[0]}</b> and <b>${LEAD[1]}</b>`;
+$("rot").innerHTML=[1,2,3,4,5,6,0].map(d=>`<div class="day ${d===dow?"on":""}"><div class="n">${DAYS[d]}</div><div class="a">${ROT[d].join(" · ")}</div></div>`).join("");
+$("seg").innerHTML=["All","A","B","C","D","E"].map(b=>`<button data-b="${b}" class="${b==="All"?"on":""}">${b==="All"?"All":b+" · "+BUCKETS[b].name}</button>`).join("");
+$("seg").onclick=e=>{const b=e.target.dataset.b;if(!b)return;bucket=b;[...$("seg").children].forEach(x=>x.classList.toggle("on",x.dataset.b===b))};
+$("minus").onclick=()=>{count=Math.max(1,count-1);$("count").value=count};
+$("plus").onclick=()=>{count=Math.min(10,count+1);$("count").value=count};
+$("readers").innerHTML=READERS.map((r,i)=>`<div class="rd"><span class="k">${i+1}</span>${r}</div>`).join("");
+$("beliefs").innerHTML=BELIEFS.map(x=>`<span>${x}</span>`).join("");
+$("fears").innerHTML=FEARS.map(x=>`<span>${x}</span>`).join("");
+$("buckets").innerHTML=Object.entries(BUCKETS).map(([k,b])=>`<div class="bk" style="--c:${b.c}"><h3><span>${k}</span>${b.name}</h3><ul>${b.topics.map(t=>`<li>${t}</li>`).join("")}</ul></div>`).join("");
+$("angles").innerHTML=ANGLES.slice(1).map((a,i)=>`<div class="ang ${LEAD.includes(i+1)?"on":""}"><span class="k">${i+1}</span><span>${a}</span></div>`).join("");
+$("ban").innerHTML=BANNED.concat(["em dashes","experts say"]).map(w=>`<span>${w}</span>`).join("");
+
+function roll(){
+  const n=count,keys=bucket==="All"?Object.keys(BUCKETS):[bucket];
+  const leadN=Math.ceil(n*.6),freshN=Math.ceil(n*.4),riskN=Math.max(1,Math.round(n/5));
+  const others=shuffle([...Array(14).keys()].map(i=>i+1).filter(a=>!LEAD.includes(a)));
+  const angles=[];for(let i=0;i<n;i++)angles.push(i<leadN?LEAD[i%2]:(others[i-leadN]??pick(LEAD)));
+  const idx=shuffle([...Array(n).keys()]);
+  const freshS=new Set(idx.slice(0,freshN)), riskS=new Set(shuffle([...Array(n).keys()]).slice(0,riskN));
+  const seen=new Set(hist().filter(x=>x.t>Date.now()-7*864e5).map(x=>x.k));
+  const used=new Set();let playbook=false;
+  const fmts=shuffle(FMT),rds=shuffle([0,1,2,3]),ins=shuffle(INDIA),dbs=shuffle(DUBAI),risks=shuffle(RISKS),sk=shuffle(keys);
+  const objs=shuffle(BELIEFS.map(x=>({t:"Belief",x})).concat(FEARS.map(x=>({t:"Fear",x}))));
+  batch=shuffle(angles).map((a,i)=>{
+    const fresh=freshS.has(i);let k,t,tries=0;
+    do{k=sk[(i+tries)%sk.length];t=pick(fresh?BUCKETS[k].fresh:BUCKETS[k].topics);tries++}
+    while(tries<40&&(used.has(t)||seen.has(t+"|"+ANGLES[a])||(t==="Playbooks"&&(playbook||Math.random()<.8))));
+    used.add(t);if(t==="Playbooks")playbook=true;
+    return{bucket:k,topic:t,fresh,angleN:a,angle:ANGLES[a],lead:LEAD.includes(a),in:ins[i%ins.length],db:dbs[i%dbs.length],budget:pick(BUDGET),
+      risk:riskS.has(i)?risks[i%risks.length]:null,obj:objs[i%objs.length],reader:rds[i%4],fmt:fmts[i%fmts.length]};
+  });
+  saveHist(batch);render();
+}
+
+function render(){
+  $("out").innerHTML=batch.map((b,i)=>`
+  <article class="card ${b.risk?"risk":""}" style="--c:${BUCKETS[b.bucket].c};animation-delay:${i*70}ms">
+    <div class="face">
+      <div class="l"><small>Indian benchmark</small><b>${b.in[0]}</b><div class="city">${b.in[1]}</div></div>
+      <div class="x">vs</div>
+      <div class="r"><small>Dubai case</small><b>${b.db[0]}</b><div class="city">${b.db[1]}</div></div>
+    </div>
+    <div class="budget">Budget lens: ${b.budget}</div>
+    <div class="body">
+      <div class="row"><span class="idx">${String(i+1).padStart(2,"0")}</span>
+        <div class="tags">${b.lead?'<span class="tag lead">Lead angle</span>':''}${b.fresh?'<span class="tag fresh">Fresh</span>':''}${b.risk?'<span class="tag risk">Credibility</span>':''}<span class="tag">${b.bucket} · ${BUCKETS[b.bucket].name}</span></div></div>
+      <div class="angle">${b.angleN}. ${b.angle}</div>
+      <div class="topic">${b.fresh?"Seed: ":""}${b.topic}</div>
+      <div class="belief ${b.obj.t==="Fear"?"fear":""}">${b.obj.t==="Fear"?"Fear it answers":"Belief it challenges"}: ${b.obj.x}</div>
+      ${b.risk?`<div class="riskline">Dubai risk to name and manage: ${b.risk}</div>`:""}
+      <dl class="kv"><dt>Reader</dt><dd>${RSHORT[b.reader]}</dd><dt>Format</dt><dd>${b.fmt}</dd></dl>
+      <div class="act"><button data-i="${i}" data-m="one">Copy idea prompt</button><button data-i="${i}" data-m="re">Reroll</button></div>
+    </div>
+  </article>`).join("");
+  const cnt={};batch.forEach(b=>cnt[b.bucket]=(cnt[b.bucket]||0)+1);
+  $("mix").innerHTML=Object.keys(cnt).map(k=>`<i style="width:${cnt[k]/batch.length*100}%;background:${BUCKETS[k].c}"></i>`).join("");
+  const c=f=>batch.filter(f).length;
+  $("legend").innerHTML=Object.keys(cnt).map(k=>`<span><b style="background:${BUCKETS[k].c}"></b>${k} · ${BUCKETS[k].name} × ${cnt[k]}</span>`).join("")+`<span>Lead ${c(b=>b.lead)}/${batch.length}</span><span>Fresh ${c(b=>b.fresh)}/${batch.length}</span><span>Credibility ${c(b=>b.risk)}/${batch.length}</span>`;
+}
+
+$("out").onclick=e=>{
+  const i=+e.target.dataset.i;if(isNaN(i))return;
+  if(e.target.dataset.m==="one")return copy(prompt([batch[i]]));
+  const b=batch[i],pool=(b.fresh?BUCKETS[b.bucket].fresh:BUCKETS[b.bucket].topics).filter(t=>!batch.some(x=>x.topic===t)&&t!=="Playbooks");
+  if(pool.length)b.topic=pick(pool);
+  b.in=pick(INDIA);b.db=pick(DUBAI);b.budget=pick(BUDGET);b.reader=Math.floor(Math.random()*4);
+  const o=pick(BELIEFS.map(x=>({t:"Belief",x})).concat(FEARS.map(x=>({t:"Fear",x}))));b.obj=o;render();
+};
+
+const ROLE=`You are a content strategist and former business journalist writing for Invest Dubai Today, an India-based platform. The reader lives in India (not an NRI) and is about to put money into property. Every idea makes one case from a fresh angle: Dubai real estate is a better place for this money than Mumbai, Bengaluru, Gurugram, Noida, Pune, Hyderabad or any other Indian property market.`;
+const FORMULA=`Core formula: Indian property belief or benchmark + Dubai counterpoint + one aha that makes the reader rethink where their next ₹1-10 crore goes. The Indian city is always the comparison. Dubai/UAE property is always the answer. Self-check: if the post does not make an India-based buyer weigh Dubai against an Indian city, rewrite it. Credibility rule: when an idea is marked CREDIBILITY, name the real Dubai risk or cost and show how informed buyers manage it. Never hide downsides.`;
+const SPEC=`For each idea give: 1) Hook (max 12 words) 2) Sub-line (max 15 words) 3) Indian benchmark 4) The aha (one sentence) 5) Dubai case 6) Proof point with source, or [VERIFY: what to check] 7) Reader + objection or belief it hits 8) Angle + bucket 9) Format 10) CTA (one line).`;
+const RULES=`Rules: never invent numbers, deals, names or quotes. No "guaranteed", "risk-free", "best investment". Celebrity items: publicly reported transactions only. Name Indian micro-markets and Dubai communities. Net over gross. No em dashes. No vague attribution. Banned words: ${BANNED.join(", ")}. Drop any idea an Indian HNI would call obvious and replace it.`;
+function prompt(items){
+  const lines=items.map((b,i)=>`${i+1}. Bucket ${b.bucket} (${BUCKETS[b.bucket].name}) | ${b.fresh?"FRESH topic, invent a new one near this seed: ":"Topic: "}${b.topic} | Angle ${b.angleN}: ${b.angle} | Suggested face-off: ${b.in[0]}, ${b.in[1]} vs ${b.db[0]}, ${b.db[1]} at ${b.budget} | ${b.obj.t==="Fear"?"Fear to answer":"Belief to challenge"}: ${b.obj.x} | Reader: ${READERS[b.reader]} | Format: ${b.fmt}${b.risk?` | CREDIBILITY: name and manage "${b.risk}"`:""}`).join("\n");
+  return `${ROLE}\nToday is ${dateStr}.\n\n${FORMULA}\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}\n\n${RULES}\n\nThe face-off, budget, reader and belief are suggestions. If one does not fit the topic (for example the two addresses are not comparable at that budget), say so and swap it before writing.`;
+}
+$("copyAll").onclick=()=>copy(prompt(batch));
+$("roll").onclick=roll;
+function copy(txt){
+  const done=()=>{$("toast").classList.add("on");setTimeout(()=>$("toast").classList.remove("on"),1400)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,()=>fb(txt,done))}else fb(txt,done);
+}
+function fb(txt,done){const t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand("copy")}catch(e){}t.remove();done()}
+roll();
+</script>
+</body>
+</html>
