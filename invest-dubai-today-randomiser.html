@@ -149,6 +149,15 @@ h2{font-size:26px;margin-bottom:6px}
 .box ul li:before{content:"";position:absolute;left:0;top:12px;width:8px;height:2px;background:var(--rose)}
 .ban{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .ban span{font-size:12px;padding:3px 9px;border-radius:6px;background:rgba(239,122,107,.1);color:#ffb3a8;text-decoration:line-through}
+.money{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.money div{padding:7px 12px;font-size:12px;color:#c9d0e2;background:var(--panel2)}
+.money div+div{border-left:1px solid var(--line);text-align:right}
+.money b{display:block;font:600 13px "JetBrains Mono",monospace;color:var(--ink)}
+.tier{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.lrs{font-size:12px;padding:7px 12px;background:rgba(155,140,255,.1);color:#cfc7ff;border-bottom:1px solid var(--line)}
+.lrs b{color:#e3ddff}
+.fair{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:24px}
+.fair .chk b{color:var(--teal)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--db);color:#1d1406;padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;transition:.3s;z-index:9}
 .toast.on{transform:translateX(-50%) translateY(0)}
 @media (max-width:760px){
@@ -195,12 +204,20 @@ h2{font-size:26px;margin-bottom:6px}
     <div class="chk s"><b>Self-check</b>If the post does not make an India-based buyer weigh Dubai against an Indian city, rewrite it.</div>
     <div class="chk k"><b>Credibility rule</b>About 1 in 5 ideas names a real Dubai risk or cost and shows how informed buyers manage it.</div>
   </div>
+  <div class="fair">
+    <div class="chk"><b>Same tier</b>Prime vs prime, mid vs mid. No Worli vs JVC.</div>
+    <div class="chk"><b>All-in landed cost</b>Budget includes stamp duty and registration in India, DLD and agent fees in Dubai.</div>
+    <div class="chk"><b>Same area basis</b>Carpet vs carpet. Dubai saleable area includes balconies.</div>
+    <div class="chk"><b>LRS reality</b>USD 250,000 per person per financial year. 20% TCS above ₹10 lakh, adjustable at ITR.</div>
+  </div>
 
   <div class="rot" id="rot"></div>
 
   <div class="ctrl">
     <span class="lbl">Bucket</span>
     <div class="seg" id="seg"></div>
+    <span class="lbl">Funding</span>
+    <div class="seg" id="fund"><button data-f="cash" class="on">All-cash both sides</button><button data-f="loan">India with home loan</button></div>
     <div class="num"><span class="lbl">Ideas</span><button id="minus">−</button><output id="count">5</output><button id="plus">+</button></div>
     <div class="go"><button class="btn g" id="copyAll">Copy batch prompt</button><button class="btn p" id="roll">Randomise</button></div>
   </div>
@@ -313,9 +330,26 @@ const BUCKETS={
 const ANGLES=["","The number nobody quotes","Myth vs reality","Side-by-side with a surprising winner","What insiders know","Contrarian take, one fact as proof","Hidden cost or hidden rule","Follow the money","Then vs now (5 or 10 years apart)","The mistake smart people make","One deal, decoded","₹1 crore in 2016: Indian city vs Dubai today","Who is buying, who is selling","The question clients ask brokers most","Ranking or league table"];
 const ROT=[[8,14],[1,6],[3,11],[7,12],[2,9],[4,10],[5,13]];
 const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-const INDIA=[["Worli","Mumbai"],["Bandra West","Mumbai"],["Powai","Mumbai"],["Whitefield","Bengaluru"],["Sarjapur Road","Bengaluru"],["Hebbal","Bengaluru"],["Golf Course Road","Gurugram"],["Dwarka Expressway","Gurugram"],["Noida Expressway","Noida"],["Hinjewadi","Pune"],["Kharadi","Pune"],["Gachibowli","Hyderabad"],["Kokapet","Hyderabad"]];
-const DUBAI=[["Downtown Dubai","Dubai"],["Dubai Marina","Dubai"],["JVC","Dubai"],["Business Bay","Dubai"],["Dubai Hills Estate","Dubai"],["Dubai Creek Harbour","Dubai"],["Dubai South","Dubai"],["Arjan","Dubai"],["Palm Jumeirah","Dubai"],["Al Furjan","Dubai"],["Sobha Hartland","Dubai"],["JLT","Dubai"],["Saadiyat Island","Abu Dhabi"],["Yas Island","Abu Dhabi"],["Al Marjan Island","Ras Al Khaimah"]];
-const BUDGET=["₹1 crore","₹2 crore","₹5 crore","₹10 crore"];
+/* Tiers: prime / upper / mid. Budgets are all-in landed cost and sit inside each tier. */
+const TIERS={
+  mid:{label:"Mid-market",budgets:[1,2],
+    india:[["Whitefield","Bengaluru"],["Sarjapur Road","Bengaluru"],["Dwarka Expressway","Gurugram"],["Noida Expressway","Noida"],["Hinjewadi","Pune"]],
+    dubai:[["JVC","Dubai"],["Arjan","Dubai"],["Dubai South","Dubai"],["Al Furjan","Dubai"],["JLT","Dubai"],["Al Marjan Island","Ras Al Khaimah"]]},
+  upper:{label:"Upper-mid",budgets:[2,5],
+    india:[["Powai","Mumbai"],["Hebbal","Bengaluru"],["Kharadi","Pune"],["Gachibowli","Hyderabad"],["Kokapet","Hyderabad"]],
+    dubai:[["Dubai Marina","Dubai"],["Business Bay","Dubai"],["Dubai Hills Estate","Dubai"],["Dubai Creek Harbour","Dubai"],["Sobha Hartland","Dubai"],["Yas Island","Abu Dhabi"]]},
+  prime:{label:"Prime",budgets:[5,10],
+    india:[["Worli","Mumbai"],["Bandra West","Mumbai"],["Golf Course Road","Gurugram"]],
+    dubai:[["Downtown Dubai","Dubai"],["Palm Jumeirah","Dubai"],["Saadiyat Island","Abu Dhabi"]]}
+};
+const LRS_CR=2.2; // USD 250,000 at roughly ₹89-90 per USD
+let funding="cash";
+function lrsNote(cr){
+  if(cr<=LRS_CR)return `Fits one buyer's LRS limit for the year. 20% TCS on the amount above ₹10 lakh, adjustable at ITR.`;
+  const n=Math.ceil(cr/LRS_CR);
+  return `<b>LRS item:</b> needs about ${n} person-years of LRS (pooled family limits or several financial years). 20% TCS above ₹10 lakh per remitter.`;
+}
+function face(){const k=pick(Object.keys(TIERS)),t=TIERS[k];return{tier:k,in:pick(t.india),db:pick(t.dubai),budget:pick(t.budgets)}}
 const READERS=["HNIs and business owners in Indian metros holding 2-3 Indian properties","Senior professionals (CXOs, founders, doctors) buying their second flat","First-time global investors who have never bought outside India","Indian brokers, wealth advisors and power brokers steering these buyers"];
 const RSHORT=["Metro HNI with 2-3 flats","CXO / founder / doctor, second flat","First-time global investor","Indian broker or wealth advisor"];
 const BELIEFS=["Indian property is safe","Indian property is familiar","Indian property appreciates over time"];
@@ -355,14 +389,17 @@ function roll(){
   const freshS=new Set(idx.slice(0,freshN)), riskS=new Set(shuffle([...Array(n).keys()]).slice(0,riskN));
   const seen=new Set(hist().filter(x=>x.t>Date.now()-7*864e5).map(x=>x.k));
   const used=new Set();let playbook=false;
-  const fmts=shuffle(FMT),rds=shuffle([0,1,2,3]),ins=shuffle(INDIA),dbs=shuffle(DUBAI),risks=shuffle(RISKS),sk=shuffle(keys);
+  const fmts=shuffle(FMT),rds=shuffle([0,1,2,3]),risks=shuffle(RISKS),sk=shuffle(keys);
+  const usedPlaces=new Set();
   const objs=shuffle(BELIEFS.map(x=>({t:"Belief",x})).concat(FEARS.map(x=>({t:"Fear",x}))));
   batch=shuffle(angles).map((a,i)=>{
     const fresh=freshS.has(i);let k,t,tries=0;
     do{k=sk[(i+tries)%sk.length];t=pick(fresh?BUCKETS[k].fresh:BUCKETS[k].topics);tries++}
     while(tries<40&&(used.has(t)||seen.has(t+"|"+ANGLES[a])||(t==="Playbooks"&&(playbook||Math.random()<.8))));
     used.add(t);if(t==="Playbooks")playbook=true;
-    return{bucket:k,topic:t,fresh,angleN:a,angle:ANGLES[a],lead:LEAD.includes(a),in:ins[i%ins.length],db:dbs[i%dbs.length],budget:pick(BUDGET),
+    let f,ft=0;do{f=face();ft++}while(ft<20&&(usedPlaces.has(f.in[0])||usedPlaces.has(f.db[0])));
+    usedPlaces.add(f.in[0]);usedPlaces.add(f.db[0]);
+    return{bucket:k,topic:t,fresh,angleN:a,angle:ANGLES[a],lead:LEAD.includes(a),...f,
       risk:riskS.has(i)?risks[i%risks.length]:null,obj:objs[i%objs.length],reader:rds[i%4],fmt:fmts[i%fmts.length]};
   });
   saveHist(batch);render();
@@ -376,7 +413,12 @@ function render(){
       <div class="x">vs</div>
       <div class="r"><small>Dubai case</small><b>${b.db[0]}</b><div class="city">${b.db[1]}</div></div>
     </div>
-    <div class="budget">Budget lens: ${b.budget}</div>
+    <div class="budget"><span class="tier">${TIERS[b.tier].label}</span> · All-in landed cost ₹${b.budget} crore</div>
+    <div class="money">
+      <div><small class="tier" style="color:var(--in)">India funding</small><b>${funding==="loan"?"Home loan + equity":"All-cash"}</b></div>
+      <div><small class="tier" style="color:var(--db)">Dubai funding</small><b>All-cash via LRS</b></div>
+    </div>
+    <div class="lrs">${lrsNote(b.budget)}</div>
     <div class="body">
       <div class="row"><span class="idx">${String(i+1).padStart(2,"0")}</span>
         <div class="tags">${b.lead?'<span class="tag lead">Lead angle</span>':''}${b.fresh?'<span class="tag fresh">Fresh</span>':''}${b.risk?'<span class="tag risk">Credibility</span>':''}<span class="tag">${b.bucket} · ${BUCKETS[b.bucket].name}</span></div></div>
@@ -399,7 +441,7 @@ $("out").onclick=e=>{
   if(e.target.dataset.m==="one")return copy(prompt([batch[i]]));
   const b=batch[i],pool=(b.fresh?BUCKETS[b.bucket].fresh:BUCKETS[b.bucket].topics).filter(t=>!batch.some(x=>x.topic===t)&&t!=="Playbooks");
   if(pool.length)b.topic=pick(pool);
-  b.in=pick(INDIA);b.db=pick(DUBAI);b.budget=pick(BUDGET);b.reader=Math.floor(Math.random()*4);
+  Object.assign(b,face());b.reader=Math.floor(Math.random()*4);
   const o=pick(BELIEFS.map(x=>({t:"Belief",x})).concat(FEARS.map(x=>({t:"Fear",x}))));b.obj=o;render();
 };
 
@@ -407,10 +449,17 @@ const ROLE=`You are a content strategist and former business journalist writing 
 const FORMULA=`Core formula: Indian property belief or benchmark + Dubai counterpoint + one aha that makes the reader rethink where their next ₹1-10 crore goes. The Indian city is always the comparison. Dubai/UAE property is always the answer. Self-check: if the post does not make an India-based buyer weigh Dubai against an Indian city, rewrite it. Credibility rule: when an idea is marked CREDIBILITY, name the real Dubai risk or cost and show how informed buyers manage it. Never hide downsides.`;
 const SPEC=`For each idea give: 1) Hook (max 12 words) 2) Sub-line (max 15 words) 3) Indian benchmark 4) The aha (one sentence) 5) Dubai case 6) Proof point with source, or [VERIFY: what to check] 7) Reader + objection or belief it hits 8) Angle + bucket 9) Format 10) CTA (one line).`;
 const RULES=`Rules: never invent numbers, deals, names or quotes. No "guaranteed", "risk-free", "best investment". Celebrity items: publicly reported transactions only. Name Indian micro-markets and Dubai communities. Net over gross. No em dashes. No vague attribution. Banned words: ${BANNED.join(", ")}. Drop any idea an Indian HNI would call obvious and replace it.`;
+const FAIR=()=>`Fair comparison rules:
+- Same tier on both sides (prime vs prime, mid vs mid). If the suggested pair is not comparable at the budget, say so and swap.
+- The budget is ALL-IN LANDED COST: Indian stamp duty and registration (state-specific) and Dubai DLD, registration and agent fees. [VERIFY current rates.]
+- Same area basis on both sides. Indian RERA carpet area vs Dubai saleable area (which includes balconies) must be adjusted or stated.
+- LRS: USD 250,000 per resident individual per financial year (about ₹2.2 crore at ₹89-90/USD). Above that, the Dubai buy needs pooled family limits or several financial years; say so. 20% TCS applies on LRS remittances above ₹10 lakh and is adjustable against final tax at ITR, so treat it as cash locked up, not a cost.
+- Funding: ${funding==="loan"?"India side uses a home loan; Dubai side is all-cash for a resident buyer [VERIFY whether any lending route exists]. Compare return on equity, not headline yield, and state the loan assumptions.":"Both sides all-cash. Compare like for like."}`;
 function prompt(items){
-  const lines=items.map((b,i)=>`${i+1}. Bucket ${b.bucket} (${BUCKETS[b.bucket].name}) | ${b.fresh?"FRESH topic, invent a new one near this seed: ":"Topic: "}${b.topic} | Angle ${b.angleN}: ${b.angle} | Suggested face-off: ${b.in[0]}, ${b.in[1]} vs ${b.db[0]}, ${b.db[1]} at ${b.budget} | ${b.obj.t==="Fear"?"Fear to answer":"Belief to challenge"}: ${b.obj.x} | Reader: ${READERS[b.reader]} | Format: ${b.fmt}${b.risk?` | CREDIBILITY: name and manage "${b.risk}"`:""}`).join("\n");
-  return `${ROLE}\nToday is ${dateStr}.\n\n${FORMULA}\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}\n\n${RULES}\n\nThe face-off, budget, reader and belief are suggestions. If one does not fit the topic (for example the two addresses are not comparable at that budget), say so and swap it before writing.`;
+  const lines=items.map((b,i)=>`${i+1}. Bucket ${b.bucket} (${BUCKETS[b.bucket].name}) | ${b.fresh?"FRESH topic, invent a new one near this seed: ":"Topic: "}${b.topic} | Angle ${b.angleN}: ${b.angle} | Face-off (${TIERS[b.tier].label}): ${b.in[0]}, ${b.in[1]} vs ${b.db[0]}, ${b.db[1]} at ₹${b.budget} crore all-in${b.budget>LRS_CR?" (LRS item: exceeds one buyer's annual limit)":""} | ${b.obj.t==="Fear"?"Fear to answer":"Belief to challenge"}: ${b.obj.x} | Reader: ${READERS[b.reader]} | Format: ${b.fmt}${b.risk?` | CREDIBILITY: name and manage "${b.risk}"`:""}`).join("\n");
+  return `${ROLE}\nToday is ${dateStr}.\n\n${FORMULA}\n\n${FAIR()}\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}\n\n${RULES}\n\nThe face-off, budget, reader and belief are suggestions. If one does not fit the topic (for example the two addresses are not comparable at that budget), say so and swap it before writing.`;
 }
+$("fund").onclick=e=>{const f=e.target.dataset.f;if(!f)return;funding=f;[...$("fund").children].forEach(x=>x.classList.toggle("on",x.dataset.f===f));render()};
 $("copyAll").onclick=()=>copy(prompt(batch));
 $("roll").onclick=roll;
 function copy(txt){
