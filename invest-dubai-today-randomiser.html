@@ -158,6 +158,49 @@ h2{font-size:26px;margin-bottom:6px}
 .lrs b{color:#e3ddff}
 .fair{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:24px}
 .fair .chk b{color:var(--teal)}
+/* Data bank */
+.asof{display:inline-block;font:600 11px "JetBrains Mono",monospace;padding:3px 9px;border-radius:99px;background:rgba(63,193,176,.12);color:var(--teal);border:1px solid rgba(63,193,176,.35);margin-left:8px;vertical-align:middle}
+.bank{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-bottom:16px}
+.chart h3,.uae h3,.pulse h3{font-size:16px;margin-bottom:4px}
+.chart .note,.uae .note{font-size:12px;color:var(--mute);margin-bottom:14px}
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:92px 1fr 64px;gap:10px;align-items:center;font-size:13px}
+.bar .nm{color:#c9d0e2}
+.track{position:relative;height:18px;background:var(--panel2);border-radius:6px;overflow:hidden}
+.track i{position:absolute;left:0;top:0;bottom:0;border-radius:6px}
+.track i.then{background:rgba(141,152,179,.35)}
+.track i.now{background:linear-gradient(90deg,var(--in),var(--in2));height:8px;top:5px;animation:grow .8s ease both}
+@keyframes grow{from{width:0!important}}
+.bar .v{font:600 12px "JetBrains Mono",monospace;text-align:right}
+.key{display:flex;gap:14px;font-size:11px;color:var(--mute);margin-top:10px}
+.key b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tabs button{background:var(--panel2);color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:5px 12px;font:500 12px Inter,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--in);color:#1d1406;border-color:var(--in)}
+.uae{display:flex;flex-direction:column;gap:10px}
+.em{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--db);border-radius:12px;padding:12px 14px}
+.em h4{font:700 15px Fraunces,serif;color:var(--db2);margin-bottom:6px}
+.em li{list-style:none;font-size:12.5px;color:#c9d0e2;padding:3px 0}
+.em li span{color:var(--mute)}
+.em li.warn{color:#ffc0b6}
+.pulse{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:16px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tile .n{font:700 24px Fraunces,serif;color:var(--ink);line-height:1.1}
+.tile .n.up{color:var(--in2)}
+.tile .l{font-size:12px;color:#c9d0e2;margin-top:4px}
+.tile .s{font-size:10px;color:var(--mute);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+.drules{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:44px}
+.drules div{font-size:13px;padding:10px 12px;border-radius:12px;background:rgba(239,122,107,.07);border:1px solid rgba(239,122,107,.28);color:#ffd5cf}
+.drules b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);margin-bottom:2px}
+.data{padding:10px 18px 0;display:flex;flex-direction:column;gap:6px}
+.dp{font-size:12px;display:flex;gap:8px;align-items:baseline}
+.dp .w{flex:none;font:600 10px Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+.dp .w.i{background:rgba(255,159,67,.15);color:var(--in)}
+.dp .w.d{background:rgba(226,184,107,.15);color:var(--db)}
+.dp span.t{color:#c9d0e2}
+.dp em{font-style:normal;color:var(--mute)}
+.mismatch{margin:8px 18px 0;font-size:12px;padding:7px 10px;border-radius:8px;background:rgba(239,122,107,.1);color:#ffc0b6;border:1px dashed rgba(239,122,107,.45)}
+@media (max-width:760px){.bank{grid-template-columns:1fr}.bar{grid-template-columns:78px 1fr 56px}}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--db);color:#1d1406;padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;transition:.3s;z-index:9}
 .toast.on{transform:translateX(-50%) translateY(0)}
 @media (max-width:760px){
@@ -202,7 +245,7 @@ h2{font-size:26px;margin-bottom:6px}
   </div>
   <div class="checks">
     <div class="chk s"><b>Self-check</b>If the post does not make an India-based buyer weigh Dubai against an Indian city, rewrite it.</div>
-    <div class="chk k"><b>Credibility rule</b>About 1 in 5 ideas names a real Dubai risk or cost and shows how informed buyers manage it.</div>
+    <div class="chk k"><b>Credibility rule</b>About 1 in 5 ideas names a real Dubai risk or cost and shows how informed buyers manage it. Credit India's strengths honestly. Win on yield, currency, holding cost and entry ticket, never on "Indian property doesn't appreciate".</div>
   </div>
   <div class="fair">
     <div class="chk"><b>Same tier</b>Prime vs prime, mid vs mid. No Worli vs JVC.</div>
@@ -225,6 +268,56 @@ h2{font-size:26px;margin-bottom:6px}
   <div class="mix" id="mix"></div>
   <div class="legend" id="legend"></div>
   <div class="grid" id="out"></div>
+
+  <h2>Data bank <span class="asof">as of Oct 2026 · refresh before use</span></h2>
+  <p class="sub">Starting figures only. Every proof point cites its source, and anything older than six months gets [VERIFY: update].</p>
+
+  <div class="bank">
+    <div class="box chart">
+      <h3>India: what the bull case looks like</h3>
+      <div class="note">ANAROCK average prices and gross yields, Q2 2026 vs 2019. India has appreciated strongly. The Dubai case is not built on denying that.</div>
+      <div class="tabs" id="itabs"><button data-v="price" class="on">Price per sq ft</button><button data-v="yield">Gross yield</button></div>
+      <div class="bars" id="ibars"></div>
+      <div class="key" id="ikey"></div>
+    </div>
+    <div class="uae">
+      <div class="em"><h4>Dubai</h4><ul>
+        <li>Launch prices AED 900 to 4,400 per sq ft, monthly averages AED 1,657 to 1,968 <span>(REIDIN, Dec 2025 to Jul 2026)</span></li>
+        <li>92% of new supply at AED 1,200 to 3,000 per sq ft; Dubailand, Majan, JVC led <span>(REIDIN, Feb 2026)</span></li>
+        <li>Apartments from about AED 525k; launch villas up to about AED 13.8M <span>(dubizzle)</span></li>
+        <li>Launches: 35 in Feb, 8 in Apr, 14 in May 2026 <span>(REIDIN)</span></li>
+        <li class="warn">Rental yields: [VERIFY: current gross yields by community]</li>
+      </ul></div>
+      <div class="em"><h4>Ras Al Khaimah</h4><ul>
+        <li>65 projects, 1,862 units on sale, entry from about AED 870k <span>(Alnair, Jul 2026)</span></li>
+        <li>Al Marjan Island: 39 projects, median about AED 3,170 per sq ft</li>
+        <li class="warn">Off-plan asking about AED 2,645 vs valuation about AED 1,160 to 1,219 per sq ft <span>(Realty Hunting, citing ValuStrat, Cavendish Maxwell)</span></li>
+        <li>Demand anchor: Wynn Al Marjan, opening due Sep 2027</li>
+      </ul></div>
+      <div class="em"><h4>Abu Dhabi</h4><ul>
+        <li>Aldar launches from about AED 805k (Yas) to AED 9.5M (Saadiyat) <span>(Property Finder, dates vary)</span></li>
+        <li>Prices up about 21.6% YoY in Q2 2026, apartments up 24.4% <span>(CBRE via The National)</span></li>
+        <li>Aldar slowed launches in 2026; latest: Talay, 351 villas, Marsa Al Saadiyat</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="pulse">
+    <div class="tile"><div class="n">₹9,714</div><div class="l">Top 7 cities avg per sq ft, +7% YoY</div><div class="s">ANAROCK · Q3 2026</div></div>
+    <div class="tile"><div class="n">1,00,220</div><div class="l">Units sold, +3% YoY</div><div class="s">ANAROCK · Q3 2026</div></div>
+    <div class="tile"><div class="n up">6.3 lakh</div><div class="l">Unsold units, +12% YoY</div><div class="s">ANAROCK · Q3 2026</div></div>
+    <div class="tile"><div class="n up">+34%</div><div class="l">Bengaluru unsold stock YoY</div><div class="s">ANAROCK · Q2 2026</div></div>
+    <div class="tile"><div class="n">−40%</div><div class="l">NCR launches; prices +13% YoY</div><div class="s">ANAROCK · Q2 2026</div></div>
+    <div class="tile"><div class="n">15 Jun</div><div class="l">Noida International Airport (Jewar) began commercial operations</div><div class="s">2026</div></div>
+  </div>
+
+  <div class="drules">
+    <div><b>Like with like</b>Launch vs launch, average vs average. Never an Indian city average next to a Dubai launch price.</div>
+    <div><b>Asking is not value</b>Flag asking vs valuation gaps.</div>
+    <div><b>Gross is gross</b>Both yield sets above are gross. Say so, or work out net.</div>
+    <div><b>Live rate</b>Convert AED to INR at the live rate, marked [VERIFY rate].</div>
+    <div><b>Six-month rule</b>Anything older than six months: [VERIFY: update].</div>
+  </div>
 
   <h2>Who reads this</h2>
   <p class="sub">India residents, not NRIs.</p>
@@ -279,7 +372,8 @@ const BUCKETS={
     "Holding costs: Indian maintenance and property tax vs Dubai service charges",
     "Construction delays: Indian project timelines vs Dubai escrow-backed off-plan",
     "Rent collection, tenant laws and eviction: India vs Dubai",
-    "Currency: rupee-held asset vs a dollar-pegged dirham asset"],
+    "Currency: rupee-held asset vs a dollar-pegged dirham asset",
+    "Unsold inventory: rising Indian stock vs Dubai launch pipeline"],
     fresh:["Carpet area vs Dubai's sellable area: what you actually get per rupee",
       "Parking, clubhouse and amenity charges in Indian projects vs what Dubai bundles",
       "Resale time: how long a flat sits in an Indian micro-market vs a Dubai community",
@@ -311,6 +405,7 @@ const BUCKETS={
     "Developer report cards vs Indian developers' track records",
     "Branded residences: Dubai price vs comparable Indian luxury",
     "Dubai REITs vs Indian REITs for those who don't want a flat",
+    "RAK and Abu Dhabi as alternatives to Dubai",
     "Big UAE real estate news decoded for Indian buyers"],
     fresh:["Dubai's freehold zones explained to someone used to Indian leasehold land",
       "Handover in Dubai vs possession in India: what each actually includes",
@@ -354,7 +449,32 @@ const READERS=["HNIs and business owners in Indian metros holding 2-3 Indian pro
 const RSHORT=["Metro HNI with 2-3 flats","CXO / founder / doctor, second flat","First-time global investor","Indian broker or wealth advisor"];
 const BELIEFS=["Indian property is safe","Indian property is familiar","Indian property appreciates over time"];
 const FEARS=["Is buying abroad legal?","Can I get my money out?","Is Dubai a bubble?","Who manages the flat from India?","How is it taxed back home?","Am I being sold to?"];
-const RISKS=["Oversupply in the pipeline","Service charges","Indian tax on Dubai rent","Managing from a distance"];
+const RISKS=["Oversupply in the pipeline","Service charges","Indian tax on Dubai rent","Managing from a distance","Asking vs valuation gaps"];
+
+/* Data bank (as of Oct 2026, from the brief; refresh before use) */
+const INDIA_DATA={
+  Mumbai:{p:29270,p19:17845,y:4.3,y19:3.5,launch:"Launch about ₹35,500/sq ft (PropEquity, 2024) [VERIFY: 2026 launch prices]"},
+  Gurugram:{p:13350,p19:6150,y:4.3,y19:3.5,launch:"Launch about ₹19,500/sq ft (PropEquity, 2024) [VERIFY: 2026 launch prices]",extra:"NCR prices +13% YoY, launches -40% (ANAROCK, Q2 2026)"},
+  Noida:{p:10780,p19:4795,y:3.9,y19:3.2,launch:"Launch about ₹16,000/sq ft (PropEquity, 2024) [VERIFY: 2026 launch prices]",extra:"Noida International Airport (Jewar) began commercial operations 15 Jun 2026"},
+  Bengaluru:{p:9450,p19:4975,y:4.6,y19:3.6,extra:"Unsold stock +34% YoY (ANAROCK, Q2 2026)"},
+  Hyderabad:{p:8090,p19:4195,y:3.6,y19:2.6},
+  Delhi:{p:26700,p19:18200,y:3.2,y19:2.2},
+  Pune:{note:"Prices +51% and yield +65 bps since 2019 (ANAROCK) [VERIFY: absolute price and yield]"}
+};
+const UAE_DATA={
+  Dubai:["Launch prices AED 900 to 4,400/sq ft; monthly averages AED 1,657 to 1,968 (REIDIN, Dec 2025 to Jul 2026)","Apartments from about AED 525k (dubizzle)","Rental yields: [VERIFY: current gross yields by community]"],
+  "Abu Dhabi":["Aldar launches about AED 805k (Yas) to AED 9.5M (Saadiyat) (Property Finder, dates vary)","Prices +21.6% YoY, apartments +24.4% (CBRE via The National, Q2 2026)"],
+  "Ras Al Khaimah":["Al Marjan Island median about AED 3,170/sq ft, 39 projects","Off-plan asking about AED 2,645 vs valuation about AED 1,160 to 1,219/sq ft (Realty Hunting, citing ValuStrat, Cavendish Maxwell)","Wynn Al Marjan opening due Sep 2027"]
+};
+const fmtINR=n=>"₹"+n.toLocaleString("en-IN");
+function indiaLines(city){
+  const d=INDIA_DATA[city];if(!d)return[];
+  if(d.note)return[d.note];
+  const g=Math.round((d.p/d.p19-1)*100);
+  const out=[`Avg ${fmtINR(d.p)}/sq ft (${fmtINR(d.p19)} in 2019, +${g}%); gross yield ${d.y}% (${d.y19}%) (ANAROCK, Q2 2026)`];
+  if(d.launch)out.push(d.launch);if(d.extra)out.push(d.extra);return out;
+}
+const DATA_RULES=`Data rules: compare launch with launch and average with average; never put an Indian city average next to a Dubai launch price. Never present asking price as value; flag asking vs valuation gaps. Indian and Dubai yields in the data bank are gross; say so or work out net. Convert AED to INR at the live rate, marked [VERIFY rate]. Any figure older than six months: [VERIFY: update]. Refresh every figure with a web search before use and cite the source in every proof point.`;
 const FMT=["LinkedIn post","Carousel","Reel hook","X thread","Data card"];
 const BANNED=["unlock","game-changer","delve","landscape","navigate","elevate","seamless","robust","leverage","journey","realm","testament","revolutionize"];
 
@@ -379,6 +499,20 @@ $("fears").innerHTML=FEARS.map(x=>`<span>${x}</span>`).join("");
 $("buckets").innerHTML=Object.entries(BUCKETS).map(([k,b])=>`<div class="bk" style="--c:${b.c}"><h3><span>${k}</span>${b.name}</h3><ul>${b.topics.map(t=>`<li>${t}</li>`).join("")}</ul></div>`).join("");
 $("angles").innerHTML=ANGLES.slice(1).map((a,i)=>`<div class="ang ${LEAD.includes(i+1)?"on":""}"><span class="k">${i+1}</span><span>${a}</span></div>`).join("");
 $("ban").innerHTML=BANNED.concat(["em dashes","experts say"]).map(w=>`<span>${w}</span>`).join("");
+
+function chart(v){
+  const rows=Object.entries(INDIA_DATA).filter(([,d])=>d.p);
+  rows.sort((a,b)=>v==="price"?b[1].p-a[1].p:b[1].y-a[1].y);
+  const max=v==="price"?30000:5;
+  $("ibars").innerHTML=rows.map(([c,d])=>{
+    const then=v==="price"?d.p19:d.y19, now=v==="price"?d.p:d.y;
+    const lab=v==="price"?`+${Math.round((d.p/d.p19-1)*100)}%`:`${d.y}%`;
+    return `<div class="bar"><span class="nm">${c}</span><div class="track"><i class="then" style="width:${then/max*100}%"></i><i class="now" style="width:${now/max*100}%"></i></div><span class="v">${lab}</span></div>`;
+  }).join("")+`<div class="bar"><span class="nm">Pune</span><div class="track"></div><span class="v" style="color:#ffc0b6">VERIFY</span></div>`;
+  $("ikey").innerHTML=`<span><b style="background:rgba(141,152,179,.6)"></b>2019</span><span><b style="background:var(--in)"></b>Q2 2026</span><span>${v==="price"?"Label: growth since 2019":"Label: gross yield now"}</span>`;
+}
+$("itabs").onclick=e=>{const v=e.target.dataset.v;if(!v)return;[...$("itabs").children].forEach(x=>x.classList.toggle("on",x.dataset.v===v));chart(v)};
+chart("price");
 
 function roll(){
   const n=count,keys=bucket==="All"?Object.keys(BUCKETS):[bucket];
@@ -419,6 +553,11 @@ function render(){
       <div><small class="tier" style="color:var(--db)">Dubai funding</small><b>All-cash via LRS</b></div>
     </div>
     <div class="lrs">${lrsNote(b.budget)}</div>
+    <div class="data">
+      ${indiaLines(b.in[1]).slice(0,1).map(t=>`<div class="dp"><span class="w i">${b.in[1]}</span><span class="t">${t}</span></div>`).join("")}
+      ${(UAE_DATA[b.db[1]]||[]).slice(0,1).map(t=>`<div class="dp"><span class="w d">${b.db[1]}</span><span class="t">${t}</span></div>`).join("")}
+    </div>
+    <div class="mismatch">${b.db[1]==="Ras Al Khaimah"?"RAK figures are asking prices well above valuation. Use valuation, or flag the gap.":"Bank pairs an India average with UAE launch prices. Find like-for-like before any per sq ft comparison."}</div>
     <div class="body">
       <div class="row"><span class="idx">${String(i+1).padStart(2,"0")}</span>
         <div class="tags">${b.lead?'<span class="tag lead">Lead angle</span>':''}${b.fresh?'<span class="tag fresh">Fresh</span>':''}${b.risk?'<span class="tag risk">Credibility</span>':''}<span class="tag">${b.bucket} · ${BUCKETS[b.bucket].name}</span></div></div>
@@ -446,7 +585,7 @@ $("out").onclick=e=>{
 };
 
 const ROLE=`You are a content strategist and former business journalist writing for Invest Dubai Today, an India-based platform. The reader lives in India (not an NRI) and is about to put money into property. Every idea makes one case from a fresh angle: Dubai real estate is a better place for this money than Mumbai, Bengaluru, Gurugram, Noida, Pune, Hyderabad or any other Indian property market.`;
-const FORMULA=`Core formula: Indian property belief or benchmark + Dubai counterpoint + one aha that makes the reader rethink where their next ₹1-10 crore goes. The Indian city is always the comparison. Dubai/UAE property is always the answer. Self-check: if the post does not make an India-based buyer weigh Dubai against an Indian city, rewrite it. Credibility rule: when an idea is marked CREDIBILITY, name the real Dubai risk or cost and show how informed buyers manage it. Never hide downsides.`;
+const FORMULA=`Core formula: Indian property belief or benchmark + Dubai counterpoint + one aha that makes the reader rethink where their next ₹1-10 crore goes. The Indian city is always the comparison. Dubai/UAE property is always the answer. Self-check: if the post does not make an India-based buyer weigh Dubai against an Indian city, rewrite it. Credibility rule: when an idea is marked CREDIBILITY, name the real Dubai risk or cost and show how informed buyers manage it. Never hide downsides. Acknowledge India's strengths honestly; win on yield, currency, holding cost and entry ticket, not on claims that Indian property doesn't appreciate.`;
 const SPEC=`For each idea give: 1) Hook (max 12 words) 2) Sub-line (max 15 words) 3) Indian benchmark 4) The aha (one sentence) 5) Dubai case 6) Proof point with source, or [VERIFY: what to check] 7) Reader + objection or belief it hits 8) Angle + bucket 9) Format 10) CTA (one line).`;
 const RULES=`Rules: never invent numbers, deals, names or quotes. No "guaranteed", "risk-free", "best investment". Celebrity items: publicly reported transactions only. Name Indian micro-markets and Dubai communities. Net over gross. No em dashes. No vague attribution. Banned words: ${BANNED.join(", ")}. Drop any idea an Indian HNI would call obvious and replace it.`;
 const FAIR=()=>`Fair comparison rules:
@@ -456,8 +595,8 @@ const FAIR=()=>`Fair comparison rules:
 - LRS: USD 250,000 per resident individual per financial year (about ₹2.2 crore at ₹89-90/USD). Above that, the Dubai buy needs pooled family limits or several financial years; say so. 20% TCS applies on LRS remittances above ₹10 lakh and is adjustable against final tax at ITR, so treat it as cash locked up, not a cost.
 - Funding: ${funding==="loan"?"India side uses a home loan; Dubai side is all-cash for a resident buyer [VERIFY whether any lending route exists]. Compare return on equity, not headline yield, and state the loan assumptions.":"Both sides all-cash. Compare like for like."}`;
 function prompt(items){
-  const lines=items.map((b,i)=>`${i+1}. Bucket ${b.bucket} (${BUCKETS[b.bucket].name}) | ${b.fresh?"FRESH topic, invent a new one near this seed: ":"Topic: "}${b.topic} | Angle ${b.angleN}: ${b.angle} | Face-off (${TIERS[b.tier].label}): ${b.in[0]}, ${b.in[1]} vs ${b.db[0]}, ${b.db[1]} at ₹${b.budget} crore all-in${b.budget>LRS_CR?" (LRS item: exceeds one buyer's annual limit)":""} | ${b.obj.t==="Fear"?"Fear to answer":"Belief to challenge"}: ${b.obj.x} | Reader: ${READERS[b.reader]} | Format: ${b.fmt}${b.risk?` | CREDIBILITY: name and manage "${b.risk}"`:""}`).join("\n");
-  return `${ROLE}\nToday is ${dateStr}.\n\n${FORMULA}\n\n${FAIR()}\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}\n\n${RULES}\n\nThe face-off, budget, reader and belief are suggestions. If one does not fit the topic (for example the two addresses are not comparable at that budget), say so and swap it before writing.`;
+  const lines=items.map((b,i)=>`${i+1}. Bucket ${b.bucket} (${BUCKETS[b.bucket].name}) | ${b.fresh?"FRESH topic, invent a new one near this seed: ":"Topic: "}${b.topic} | Angle ${b.angleN}: ${b.angle} | Face-off (${TIERS[b.tier].label}): ${b.in[0]}, ${b.in[1]} vs ${b.db[0]}, ${b.db[1]} at ₹${b.budget} crore all-in${b.budget>LRS_CR?" (LRS item: exceeds one buyer's annual limit)":""} | ${b.obj.t==="Fear"?"Fear to answer":"Belief to challenge"}: ${b.obj.x} | Reader: ${READERS[b.reader]} | Format: ${b.fmt}${b.risk?` | CREDIBILITY: name and manage "${b.risk}"`:""}\n   Starting data (refresh before use): ${indiaLines(b.in[1]).concat(UAE_DATA[b.db[1]]||[]).join("; ")}`).join("\n");
+  return `${ROLE}\nToday is ${dateStr}.\n\n${FORMULA}\n\n${FAIR()}\n\n${DATA_RULES}\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}\n\n${RULES}\n\nThe face-off, budget, reader and belief are suggestions. If one does not fit the topic (for example the two addresses are not comparable at that budget), say so and swap it before writing.`;
 }
 $("fund").onclick=e=>{const f=e.target.dataset.f;if(!f)return;funding=f;[...$("fund").children].forEach(x=>x.classList.toggle("on",x.dataset.f===f));render()};
 $("copyAll").onclick=()=>copy(prompt(batch));
