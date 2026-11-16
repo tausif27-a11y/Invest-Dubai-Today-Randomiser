@@ -201,6 +201,7 @@ h2{font-size:26px;margin-bottom:6px}
 .dp em{font-style:normal;color:var(--mute)}
 .mismatch{margin:8px 18px 0;font-size:12px;padding:7px 10px;border-radius:8px;background:rgba(239,122,107,.1);color:#ffc0b6;border:1px dashed rgba(239,122,107,.45)}
 @media (max-width:760px){.bank{grid-template-columns:1fr}.bar{grid-template-columns:78px 1fr 56px}}
+.reel{display:flex;flex-wrap:wrap;gap:4px;font-size:11px}.reel span{padding:2px 7px;border-radius:5px;background:rgba(155,140,255,.12);color:#cfc7ff}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--db);color:#1d1406;padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;transition:.3s;z-index:9}
 .toast.on{transform:translateX(-50%) translateY(0)}
 @media (max-width:760px){
@@ -347,7 +348,7 @@ h2{font-size:26px;margin-bottom:6px}
       <li><b>Proof point</b> source, or [VERIFY: what to check]</li>
       <li><b>Reader + objection</b> or belief it hits</li>
       <li><b>Angle + bucket</b></li>
-      <li><b>Format</b> LinkedIn post, carousel, Reel hook, X thread, data card</li>
+      <li><b>Format</b> LinkedIn post, carousel, Reel (Hook, Question / Delay, Rehook, Question / Delay, Answer), X thread, data card</li>
       <li><b>CTA</b> one line that earns the click</li>
     </ol></div>
     <div class="box"><ul>
@@ -475,7 +476,7 @@ function indiaLines(city){
   if(d.launch)out.push(d.launch);if(d.extra)out.push(d.extra);return out;
 }
 const DATA_RULES=`Data rules: compare launch with launch and average with average; never put an Indian city average next to a Dubai launch price. Never present asking price as value; flag asking vs valuation gaps. Indian and Dubai yields in the data bank are gross; say so or work out net. Convert AED to INR at the live rate, marked [VERIFY rate]. Any figure older than six months: [VERIFY: update]. Refresh every figure with a web search before use and cite the source in every proof point.`;
-const FMT=["LinkedIn post","Carousel","Reel hook","X thread","Data card"];
+const FMT=["LinkedIn post","Carousel","Reel","X thread","Data card"];
 const BANNED=["unlock","game-changer","delve","landscape","navigate","elevate","seamless","robust","leverage","journey","realm","testament","revolutionize"];
 
 const now=new Date(),dow=now.getDay(),LEAD=ROT[dow];
@@ -565,7 +566,7 @@ function render(){
       <div class="topic">${b.fresh?"Seed: ":""}${b.topic}</div>
       <div class="belief ${b.obj.t==="Fear"?"fear":""}">${b.obj.t==="Fear"?"Fear it answers":"Belief it challenges"}: ${b.obj.x}</div>
       ${b.risk?`<div class="riskline">Dubai risk to name and manage: ${b.risk}</div>`:""}
-      <dl class="kv"><dt>Reader</dt><dd>${RSHORT[b.reader]}</dd><dt>Format</dt><dd>${b.fmt}</dd></dl>
+      <dl class="kv"><dt>Reader</dt><dd>${RSHORT[b.reader]}</dd><dt>Format</dt><dd>${b.fmt}${reelNote(b)}</dd></dl>
       <div class="act"><button data-i="${i}" data-m="one">Copy idea prompt</button><button data-i="${i}" data-m="re">Reroll</button></div>
     </div>
   </article>`).join("");
@@ -586,6 +587,15 @@ $("out").onclick=e=>{
 
 const ROLE=`You are a content strategist and former business journalist writing for Invest Dubai Today, an India-based platform. The reader lives in India (not an NRI) and is about to put money into property. Every idea makes one case from a fresh angle: Dubai real estate is a better place for this money than Mumbai, Bengaluru, Gurugram, Noida, Pune, Hyderabad or any other Indian property market.`;
 const FORMULA=`Core formula: Indian property belief or benchmark + Dubai counterpoint + one aha that makes the reader rethink where their next ₹1-10 crore goes. The Indian city is always the comparison. Dubai/UAE property is always the answer. Self-check: if the post does not make an India-based buyer weigh Dubai against an Indian city, rewrite it. Credibility rule: when an idea is marked CREDIBILITY, name the real Dubai risk or cost and show how informed buyers manage it. Never hide downsides. Acknowledge India's strengths honestly; win on yield, currency, holding cost and entry ticket, not on claims that Indian property doesn't appreciate.`;
+const REEL=`Reel structure (for every idea with Format: Reel). Write the script in five beats, in this order, each with on-screen text and voiceover:
+1) Hook (0-3 sec): one scroll-stopping line, max 10 words, built on the idea's most surprising real fact.
+2) Question / Delay: raise the question the viewer now needs answered, and hold the answer back.
+3) Rehook: a second surprise (a new number, a twist, or the contrast with the Indian city) that keeps them watching.
+4) Question / Delay: sharpen the question or raise the stakes once more. Still no answer.
+5) Answer: the payoff, with the proof point and its source on screen, the risk named, and the one-line CTA.
+Keep it to 30-45 seconds (about 90-110 words of voiceover). Hook and rehook must use real, sourced facts, never exaggeration. For a Reel, these five beats replace the Hook and Sub-line fields; keep the other fields.`;
+const REEL_BEATS=["Hook","Question / Delay","Rehook","Question / Delay","Answer"];
+const reelNote=b=>b.fmt==="Reel"?` <div class="reel">${REEL_BEATS.map((x,i)=>`<span>${i+1}. ${x}</span>`).join("")}</div>`:"";
 const SPEC=`For each idea give: 1) Hook (max 12 words) 2) Sub-line (max 15 words) 3) Indian benchmark 4) The aha (one sentence) 5) Dubai case 6) Proof point with source, or [VERIFY: what to check] 7) Reader + objection or belief it hits 8) Angle + bucket 9) Format 10) CTA (one line).`;
 const RULES=`Rules: never invent numbers, deals, names or quotes. No "guaranteed", "risk-free", "best investment". Celebrity items: publicly reported transactions only. Name Indian micro-markets and Dubai communities. Net over gross. No em dashes. No vague attribution. Banned words: ${BANNED.join(", ")}. Drop any idea an Indian HNI would call obvious and replace it.`;
 const FAIR=()=>`Fair comparison rules:
@@ -596,7 +606,7 @@ const FAIR=()=>`Fair comparison rules:
 - Funding: ${funding==="loan"?"India side uses a home loan; Dubai side is all-cash for a resident buyer [VERIFY whether any lending route exists]. Compare return on equity, not headline yield, and state the loan assumptions.":"Both sides all-cash. Compare like for like."}`;
 function prompt(items){
   const lines=items.map((b,i)=>`${i+1}. Bucket ${b.bucket} (${BUCKETS[b.bucket].name}) | ${b.fresh?"FRESH topic, invent a new one near this seed: ":"Topic: "}${b.topic} | Angle ${b.angleN}: ${b.angle} | Face-off (${TIERS[b.tier].label}): ${b.in[0]}, ${b.in[1]} vs ${b.db[0]}, ${b.db[1]} at ₹${b.budget} crore all-in${b.budget>LRS_CR?" (LRS item: exceeds one buyer's annual limit)":""} | ${b.obj.t==="Fear"?"Fear to answer":"Belief to challenge"}: ${b.obj.x} | Reader: ${READERS[b.reader]} | Format: ${b.fmt}${b.risk?` | CREDIBILITY: name and manage "${b.risk}"`:""}\n   Starting data (refresh before use): ${indiaLines(b.in[1]).concat(UAE_DATA[b.db[1]]||[]).join("; ")}`).join("\n");
-  return `${ROLE}\nToday is ${dateStr}.\n\n${FORMULA}\n\n${FAIR()}\n\n${DATA_RULES}\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}\n\n${RULES}\n\nThe face-off, budget, reader and belief are suggestions. If one does not fit the topic (for example the two addresses are not comparable at that budget), say so and swap it before writing.`;
+  return `${ROLE}\nToday is ${dateStr}.\n\n${FORMULA}\n\n${FAIR()}\n\n${DATA_RULES}\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}${items.some(b=>b.fmt==="Reel")?"\n\n"+REEL:""}\n\n${RULES}\n\nThe face-off, budget, reader and belief are suggestions. If one does not fit the topic (for example the two addresses are not comparable at that budget), say so and swap it before writing.`;
 }
 $("fund").onclick=e=>{const f=e.target.dataset.f;if(!f)return;funding=f;[...$("fund").children].forEach(x=>x.classList.toggle("on",x.dataset.f===f));render()};
 $("copyAll").onclick=()=>copy(prompt(batch));

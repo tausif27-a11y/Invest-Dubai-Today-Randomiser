@@ -114,6 +114,7 @@ h2{font-size:26px;margin-bottom:6px}
 .src{font-size:12px;color:var(--mute);columns:2 320px;column-gap:24px}
 .src li{margin:0 0 6px 16px;break-inside:avoid}
 .src li i{font-style:normal;color:var(--soft)}
+.reel{display:flex;flex-wrap:wrap;gap:4px;font-size:11px}.reel span{padding:2px 7px;border-radius:5px;background:rgba(155,140,255,.12);color:#cfc7ff}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--db);color:#1d1406;padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;transition:.3s;z-index:9}
 .toast.on{transform:translateX(-50%) translateY(0)}
 @media (max-width:760px){.go{margin-left:0;width:100%}.go .btn{flex:1}.grid{grid-template-columns:1fr}}
@@ -365,7 +366,7 @@ const QUESTIONS=[
   ["Trust","Is the developer and escrow solid, and how do I check from India?"]
 ];
 const ANGLES=["The number nobody quotes","Myth vs reality","Side-by-side with a surprising winner","What insiders know","Contrarian take, one fact as proof","Hidden cost or hidden rule","Follow the money","Then vs now","The mistake smart people make","One deal, decoded","Who is buying, who is selling","Ranking or league table"];
-const FMT=["LinkedIn post","Carousel","Reel hook","X thread","Data card","WhatsApp explainer"];
+const FMT=["LinkedIn post","Carousel","Reel","X thread","Data card","WhatsApp explainer"];
 
 /* ---------- App ---------- */
 const $=id=>document.getElementById(id);
@@ -412,7 +413,7 @@ function render(){
     <div class="body">
       <div class="q"><small>Their question · ${b.q[0]}</small>${b.q[1]}</div>
       <div class="risk">Name the risk: ${d.risk}</div>
-      <div class="tags">${d.band?`<span class="tag ${b.fit?"fit":"misfit"}">${b.fit?"Budget fits":"Budget stretch: say so"}</span>`:""}<span class="tag">${b.angle}</span><span class="tag">${b.fmt}</span></div>
+      <div class="tags">${d.band?`<span class="tag ${b.fit?"fit":"misfit"}">${b.fit?"Budget fits":"Budget stretch: say so"}</span>`:""}<span class="tag">${b.angle}</span><span class="tag">${b.fmt}</span></div>${reelNote(b)}
       <div class="act"><button data-i="${i}" data-m="one">Copy idea prompt</button><button data-i="${i}" data-m="re">Reroll</button></div>
     </div>
   </article>`}).join("");
@@ -439,6 +440,15 @@ Writing rules:
 - LRS: USD 250,000 per person per financial year; 20% TCS above ₹10 lakh, adjustable at ITR. If the budget exceeds one person's limit, say how (pooled family limits or several years).
 - No "guaranteed", "risk-free", "best investment". No em dashes. Net over gross.
 - Banned words: unlock, game-changer, delve, landscape, navigate, elevate, seamless, robust, leverage, journey, realm, testament, revolutionize.`;
+const REEL=`Reel structure (for every idea with Format: Reel). Write the script in five beats, in this order, each with on-screen text and voiceover:
+1) Hook (0-3 sec): one scroll-stopping line, max 10 words, built on the idea's most surprising real fact.
+2) Question / Delay: raise the question the viewer now needs answered, and hold the answer back.
+3) Rehook: a second surprise (a new number, a twist, or the contrast with the Indian city) that keeps them watching.
+4) Question / Delay: sharpen the question or raise the stakes once more. Still no answer.
+5) Answer: the payoff, with the proof point and its source on screen, the risk named, and the one-line CTA.
+Keep it to 30-45 seconds (about 90-110 words of voiceover). Hook and rehook must use real, sourced facts, never exaggeration. For a Reel, these five beats replace the Hook and Sub-line fields; keep the other fields.`;
+const REEL_BEATS=["Hook","Question / Delay","Rehook","Question / Delay","Answer"];
+const reelNote=b=>b.fmt==="Reel"?` <div class="reel">${REEL_BEATS.map((x,i)=>`<span>${i+1}. ${x}</span>`).join("")}</div>`:"";
 const SPEC=`For each idea give: 1) Hook (max 12 words) 2) Sub-line (max 15 words) 3) The development and the India comparison 4) The answer to the investor's question in two or three sentences 5) The risk and how to manage it 6) Proof points, each with outlet and date 7) Format 8) CTA (one line).`;
 function prompt(items){
   const lines=items.map((b,i)=>`${i+1}. Development: ${b.dev.name} (${b.dev.where})
@@ -450,7 +460,7 @@ ${b.dev.facts.map(f=>"   - "+f).join("\n")}
    Their question (${b.q[0]}): ${b.q[1]}
    Risk to name: ${b.dev.risk}
    Angle: ${b.angle} | Format: ${b.fmt}`).join("\n");
-  return `${BRIEF}\nToday is ${dateStr}.\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}\n\n${RULES}`;
+  return `${BRIEF}\nToday is ${dateStr}.\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}${items.some(b=>b.fmt==="Reel")?"\n\n"+REEL:""}\n\n${RULES}`;
 }
 $("copyAll").onclick=()=>copy(prompt(batch));
 $("roll").onclick=roll;
