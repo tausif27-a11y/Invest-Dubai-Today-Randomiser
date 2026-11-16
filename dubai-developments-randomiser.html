@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dubai Developments Randomiser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1120; --panel:#121a2d; --panel2:#182239; --line:#25314c;
+  --ink:#eef1f7; --mute:#8d98b3; --soft:#c9d0e2;
+  --in:#ff9f43; --in2:#ffc48a; --db:#e2b86b; --db2:#f5dcaa;
+  --teal:#3fc1b0; --rose:#ef7a6b; --violet:#9b8cff; --sky:#5aa9ff;
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;min-height:100vh;
+  background-image:radial-gradient(900px 480px at 100% -10%,rgba(226,184,107,.18),transparent 60%),
+  radial-gradient(900px 480px at 0% -10%,rgba(255,159,67,.13),transparent 60%);}
+a{color:var(--db)}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 80px}
+h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:-.01em}
+.brandbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;margin-bottom:22px}
+.brand{font:700 18px Fraunces,serif}.brand span{color:var(--db)}
+.nav{font-size:13px;color:var(--mute)}.nav a{text-decoration:none;border-bottom:1px dashed var(--db)}
+
+.hero{border:1px solid var(--line);border-radius:22px;padding:28px 26px;margin-bottom:18px;
+  background:linear-gradient(120deg,rgba(255,159,67,.16),rgba(226,184,107,.06) 55%,rgba(63,193,176,.08))}
+.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--db)}
+.hero h1{font-size:clamp(28px,4.4vw,46px);line-height:1.05;margin:6px 0 10px;color:var(--db2)}
+.hero p{color:var(--soft);max-width:760px;font-size:14px}
+.eq{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center;font-size:13px}
+.eq span{padding:5px 11px;border-radius:99px;border:1px solid var(--line);background:rgba(11,17,32,.5)}
+.eq b{color:var(--mute);font:700 16px Fraunces,serif}
+.eq .p{color:var(--in2)} .eq .d{color:var(--db2)} .eq .q{color:#cfc7ff} .eq .a{color:var(--teal)}
+
+.pulse{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:22px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tile .n{font:700 22px Fraunces,serif;line-height:1.1}
+.tile .n.w{color:#ffc0b6}
+.tile .l{font-size:12px;color:var(--soft);margin-top:4px}
+.tile .s{font-size:10px;color:var(--mute);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+
+.ctrl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px}
+.lbl{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.1em;margin-right:4px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button,.num button{background:var(--panel2);color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:7px 13px;font:500 13px Inter,sans-serif;cursor:pointer}
+.seg button.on{color:#1d1406;background:var(--db);border-color:var(--db)}
+.num{display:flex;align-items:center;gap:8px}.num output{min-width:22px;text-align:center;font-weight:600}
+.go{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:11px 18px;font:600 14px Inter,sans-serif;cursor:pointer;transition:.15s}
+.btn.p{background:linear-gradient(90deg,var(--in),var(--db));color:#1d1406;box-shadow:0 6px 24px rgba(226,184,107,.3)}
+.btn.p:hover{transform:translateY(-1px)}
+.btn.g{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--mute);margin:10px 0 18px}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:16px;margin-bottom:44px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;animation:rise .45s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.head{padding:14px 16px 12px;border-top:4px solid var(--c);background:linear-gradient(180deg,rgba(226,184,107,.1),transparent)}
+.head .cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c);font-weight:600}
+.head h3{font-size:20px;line-height:1.15;margin:4px 0 2px;color:var(--db2)}
+.head .where{font-size:12px;color:var(--mute)}
+.fact{padding:10px 16px;font-size:13px;color:var(--soft);border-top:1px solid var(--line);background:var(--panel2)}
+.fact em{font-style:normal;color:var(--mute);font-size:11px;display:block;margin-top:3px}
+.vs{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:baseline;padding:10px 16px;border-top:1px solid var(--line);font-size:13px}
+.vs .w{font:600 10px Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:5px;background:rgba(255,159,67,.15);color:var(--in)}
+.who{padding:12px 16px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
+.who .av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,159,67,.15);color:var(--in2);font:700 14px Fraunces,serif}
+.who b{display:block;font-size:13px}
+.who span{font-size:12px;color:var(--mute)}
+.body{padding:12px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.q{font:500 17px/1.3 Fraunces,serif}
+.q small{display:block;font:600 10px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#cfc7ff;margin-bottom:3px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;padding:3px 9px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);color:var(--mute)}
+.tag.fit{color:var(--teal);border-color:rgba(63,193,176,.5)}
+.tag.misfit{color:#ffb3a8;border-color:rgba(239,122,107,.55)}
+.risk{font-size:13px;padding:8px 12px;border-radius:10px;background:rgba(239,122,107,.1);border-left:3px solid var(--rose);color:#ffc0b6}
+.act{display:flex;gap:8px;margin-top:auto;padding-top:6px}
+.act button{flex:1;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px;font:500 12px Inter,sans-serif;cursor:pointer}
+.act button:hover{border-color:var(--db);color:var(--db)}
+
+h2{font-size:26px;margin-bottom:6px}
+.sub{color:var(--mute);margin-bottom:18px;font-size:14px}
+.asof{display:inline-block;font:600 11px "JetBrains Mono",monospace;padding:3px 9px;border-radius:99px;background:rgba(63,193,176,.12);color:var(--teal);border:1px solid rgba(63,193,176,.35);margin-left:8px;vertical-align:middle}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:44px}
+.cbox{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:var(--r);padding:16px}
+.cbox h3{font-size:17px;margin-bottom:10px}.cbox h3 span{color:var(--c)}
+.cbox li{list-style:none;font-size:13px;color:var(--soft);padding:7px 0;border-bottom:1px solid rgba(37,49,76,.6)}
+.cbox li:last-child{border:0}
+.cbox li b{color:var(--ink);font-weight:600}
+.personas{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:44px}
+.pc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;font-size:13px;color:var(--soft)}
+.pc h4{font-size:16px;color:var(--in2);margin-bottom:4px}
+.pc .bd{font:600 11px "JetBrains Mono",monospace;color:var(--db);margin-bottom:6px}
+.qs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-bottom:44px}
+.qs div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--soft)}
+.qs b{display:block;color:#cfc7ff;font:600 15px Fraunces,serif;margin-bottom:2px}
+.src{font-size:12px;color:var(--mute);columns:2 320px;column-gap:24px}
+.src li{margin:0 0 6px 16px;break-inside:avoid}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--db);color:#1d1406;padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;transition:.3s;z-index:9}
+.toast.on{transform:translateX(-50%) translateY(0)}
+@media (max-width:760px){.go{margin-left:0;width:100%}.go .btn{flex:1}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <div class="brand">Invest <span>Dubai</span> Today · <span style="color:var(--mute);font:500 14px Inter">developments randomiser</span></div>
+    <div class="nav"><a href="invest-dubai-today-randomiser.html">India vs Dubai randomiser</a></div>
+  </div>
+
+  <section class="hero">
+    <div class="kicker">What is being built, through an Indian buyer's eyes</div>
+    <h1>One Dubai development.<br>One Indian investor. One question.</h1>
+    <p>Each card pairs a real 2026 Dubai development or market signal with an India-based investor and the question they would actually ask before wiring money under LRS. Figures are starting points from public reporting, marked with their source. Verify before publishing.</p>
+    <div class="eq"><span class="d">Dubai development</span><b>+</b><span class="p">Indian investor</span><b>+</b><span class="q">Their real question</span><b>=</b><span class="a">One idea</span></div>
+  </section>
+
+  <h2>Market pulse <span class="asof">researched Nov 2026 · verify before use</span></h2>
+  <p class="sub">The backdrop every idea sits against.</p>
+  <div class="pulse">
+    <div class="tile"><div class="n">20.6%</div><div class="l">Indians' share of Dubai buying activity, largest foreign group</div><div class="s">Harbor / DXBinteract · H1 2026</div></div>
+    <div class="tile"><div class="n">AED 252bn</div><div class="l">Dubai transactions, +31% YoY; 29,312 new investors</div><div class="s">DLD · Q1 2026</div></div>
+    <div class="tile"><div class="n">104</div><div class="l">Projects completed, +38.7% YoY</div><div class="s">DLD · H1 2026</div></div>
+    <div class="tile"><div class="n w">~120,000</div><div class="l">Units scheduled for handover in 2026; Fitch flagged up to 15% price correction</div><div class="s">Fitch · 2025 forecast</div></div>
+    <div class="tile"><div class="n w">43%</div><div class="l">Of Q1 2026 scheduled units actually delivered (12,900 of ~30,300)</div><div class="s">Real Estate Club Dubai</div></div>
+    <div class="tile"><div class="n">25 Sep</div><div class="l">DLD "Dubai RE connect" roadshow in Bengaluru, after Delhi and Mumbai</div><div class="s">2026</div></div>
+  </div>
+
+  <div class="ctrl">
+    <span class="lbl">Development type</span>
+    <div class="seg" id="seg"></div>
+  </div>
+  <div class="ctrl">
+    <span class="lbl">Investor</span>
+    <div class="seg" id="pseg"></div>
+    <div class="num"><span class="lbl">Ideas</span><button id="minus">−</button><output id="count">5</output><button id="plus">+</button></div>
+    <div class="go"><button class="btn g" id="copyAll">Copy batch prompt</button><button class="btn p" id="roll">Randomise</button></div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="grid" id="out"></div>
+
+  <h2>Development universe</h2>
+  <p class="sub">What the randomiser draws from. Each entry carries an Indian parallel so the reader has something familiar to measure it against.</p>
+  <div class="cats" id="cats"></div>
+
+  <h2>The Indian investors</h2>
+  <p class="sub">India residents buying under LRS, not NRIs. Budgets are all-in, in ₹ crore.</p>
+  <div class="personas" id="personas"></div>
+
+  <h2>The questions they ask</h2>
+  <p class="sub">Every idea answers one of these about one development.</p>
+  <div class="qs" id="qs"></div>
+
+  <h2>Sources</h2>
+  <p class="sub">Several are broker or marketing blogs. Treat their numbers as leads, and confirm against DLD, RERA, the developer or primary reporting.</p>
+  <ul class="src" id="src"></ul>
+</div>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+/* ---------- Research data (Nov 2026) ---------- */
+const CATS={
+  M:{name:"Master communities",c:"var(--db)"},
+  W:{name:"Waterfront and islands",c:"var(--sky)"},
+  I:{name:"Infrastructure corridors",c:"var(--teal)"},
+  B:{name:"Indian-linked developers",c:"var(--in)"},
+  S:{name:"Rules and market signals",c:"var(--violet)"}
+};
+/* band: indicative ₹ crore range a buyer would need; null = applies to any budget */
+const DEVS=[
+  {cat:"M",name:"Emaar's new mega-community",where:"Southeast of Dubai Hills Estate · Emaar",band:[2,10],
+   fact:"Announced 11 Jun 2026: about AED 200bn, roughly 4.5M sq m, room for about 150,000 residents.",src:"Cresco Real Estate launch list",
+   india:"Large integrated townships such as Lodha Palava or Godrej's township plans: phase-one buyers bet on the master plan.",
+   risk:"Early phases price in a plan, not a finished city. Decade-long build-out."},
+  {cat:"M",name:"Emaar South golf launches",where:"Golf Vale, Golf Trails, Golf Fields · Dubai South",band:[1,5],
+   fact:"Listed among Emaar's 2026 launches, beside the Al Maktoum airport and Expo City corridor.",src:"Cresco Real Estate launch list",
+   india:"Dwarka Expressway and Jewar-side Noida: housing sold on the strength of a future airport.",
+   risk:"Value depends on the airport timeline. Handover wave in the same corridor."},
+  {cat:"M",name:"DAMAC Lagoons and DAMAC Hills",where:"Mykonos townhomes; DAMAC District final collection · DAMAC",band:[2,5],
+   fact:"DAMAC's 2026 launches lean on themed villa clusters and final phases of existing communities.",src:"Cresco / RHK Properties launch lists",
+   india:"Gated villa plots on Sarjapur Road or Golf Course Extension Road.",
+   risk:"Themed communities far from jobs: check rent demand and service charges per sq ft."},
+  {cat:"M",name:"Sobha Hartland II and Sobha Reserve",where:"MBR City and Dubailand · Sobha Realty",band:[2,10],
+   fact:"Sobha's pipeline centres on the Hartland ecosystem, plus Sobha Reserve villas and Sobha Central on Sheikh Zayed Road.",src:"Engel & Völkers; RHK Properties",
+   india:"Sobha Ltd's own Bengaluru projects: same founder lineage, very different market.",
+   risk:"Brand familiarity is not a yield. Compare service charges and rent comps in Hartland."},
+  {cat:"W",name:"Palm Jebel Ali",where:"Jebel Ali coast · Nakheel",band:[5,10],
+   fact:"Relaunched 2023; 16 fronds across seven islands, phased handovers. One report puts villas from about AED 18.5M [VERIFY]. Palm Central Private Residences listed for 2026.",src:"Off-plan Properties; The Luxury Playbook",
+   india:"Alibaug and sea-facing Worli: scarcity of real waterfront.",
+   risk:"Ticket far above one person's LRS limit. Long timeline; seller claims of a discount to Palm Jumeirah are unverified."},
+  {cat:"W",name:"Dubai Islands",where:"Off Deira coast · Nakheel",band:[2,5],
+   fact:"Early-stage coastal master plan. Chennai's Casagrand entered here with Casagrand Hermina.",src:"Wikipedia; Gulf News; GeoSquare",
+   india:"Buying early in Navi Mumbai before the airport and trans-harbour link.",
+   risk:"Amenities and rental demand still ramping up. Early resale market is thin."},
+  {cat:"W",name:"Rashid Yachts and Marina",where:"Port Rashid · Emaar",band:[2,10],
+   fact:"Fior 1 and Sera 1 among Emaar's 2026 releases in this marina district.",src:"Cresco Real Estate launch list",
+   india:"Mumbai's eastern waterfront redevelopment talk vs a marina that is actually being built.",
+   risk:"Waterfront premium already in launch price. Verify service charges on marina amenities."},
+  {cat:"I",name:"Dubai South and Al Maktoum International",where:"Dubai South",band:[1,2],
+   fact:"Planned as one of the world's largest airports (reported US$35bn programme). One guide puts Dubai South at about AED 750 to 850 per sq ft in early 2026 vs AED 2,000+ in premium districts [VERIFY].",src:"Zeyad Eid; Offplan Insider",
+   india:"Noida International Airport (Jewar) began commercial operations on 15 Jun 2026. Same airport-led story, two cities.",
+   risk:"5 to 10 year bet. Airport phasing and the 2026 handover wave both weigh on near-term rents."},
+  {cat:"I",name:"Metro Blue Line corridor",where:"Mirdif, Silicon Oasis, Academic City, Creek · RTA",band:[1,2],
+   fact:"30 km, 14 stations, opening due 9 Sep 2029. RTA projects land values near stations up 15 to 30%. Rents in nine linked communities rose about 23% after the Nov 2023 announcement.",src:"Khaleej Times; Property Finder; Gulf News",
+   india:"Bengaluru Purple Line and Mumbai Metro Line 3: prices moved on announcement, not opening.",
+   risk:"Much of the uplift may already be priced in. Opening is three years out."},
+  {cat:"I",name:"Expo City Dubai",where:"Expo City · Dubai South corridor",band:[1,5],
+   fact:"Own metro station; recent launches reported with 10% on booking.",src:"Offplan Insider / agent guides",
+   india:"Post-event city reuse, like GIFT City's slow-then-steady occupancy.",
+   risk:"Check how much of the payment plan falls before handover vs your LRS years."},
+  {cat:"B",name:"Sunteck Realty's Downtown Dubai towers",where:"Downtown Dubai · Sunteck with MAS Real Estate",band:[5,10],
+   fact:"Mumbai developer's first Dubai project: two towers on 2.5 acres, branded residences, GDV close to ₹10,000 crore, launch targeted 2026 [VERIFY launch status].",src:"Business Standard; Enterprise; GeoSquare",
+   india:"The BKC / ODC Goregaon developer, now selling in Downtown. Same brand, AED pricing.",
+   risk:"First project outside India: no Dubai delivery record yet. Check escrow and the local partner's track record."},
+  {cat:"B",name:"Casagrand Hermina",where:"Dubai Islands · Casagrand (Chennai)",band:[2,5],
+   fact:"Chennai developer's UAE entry in 2025; Hermina won off-plan project awards in 2026.",src:"Gulf News; GeoSquare",
+   india:"A developer Chennai buyers already know, building abroad.",
+   risk:"Awards are not delivery. First Dubai handover still ahead."},
+  {cat:"B",name:"W Residences, JLT",where:"Jumeirah Lake Towers · Signature Developers with Marriott",band:[2,5],
+   fact:"Raju Shroff's Signature Developers with Marriott: 180+ branded apartments.",src:"Gulf News",
+   india:"Branded residences in India (Trump Towers, Four Seasons Worli) vs a branded flat in JLT.",
+   risk:"Branded premium and higher service charges. Compare net yield with an unbranded JLT unit."},
+  {cat:"B",name:"Indian buyers at Dubai developers",where:"Market-wide",band:null,
+   fact:"Indians 20.6% of buying activity in H1 2026 (Harbor/DXBinteract); 22% of foreign buyers in 2025 (Real Estate Club Dubai); India 14.38% of BNW Developments' H1 business.",src:"Editorji; Branford; BNW; The Week",
+   india:"Who your neighbours will be, and who buys from you at exit.",
+   risk:"Nationality shares come from brokers' readings of DLD data, not an official DLD series."},
+  {cat:"S",name:"Golden Visa: Feb 2026 rule change",where:"UAE federal / DLD",band:[2,10],
+   fact:"Threshold still AED 2M. A Feb 2026 circular reportedly removed the AED 1M upfront requirement; mortgaged (with bank NOC) and off-plan units can qualify on DLD value [VERIFY with ICP/DLD].",src:"Janus Hermes; Real Intel; Upper Setup",
+   india:"A ₹4.5 crore-plus buy that comes with 10-year family residency.",
+   risk:"AED 2M at today's rate exceeds one person's annual LRS. Rules quoted mostly by consultants."},
+  {cat:"S",name:"DLD tokenisation, Phase II",where:"Dubai Land Department",band:[0,1],
+   fact:"Phase II launched Feb 2026, allowing secondary resale within a controlled pilot.",src:"Nex Consultants",
+   india:"Fractional ownership platforms under SEBI's SM-REIT rules vs Dubai title-backed tokens.",
+   risk:"[VERIFY whether an India resident can buy property tokens under LRS/ODI rules.] Pilot scale only."},
+  {cat:"S",name:"The 2026 handover wave",where:"Market-wide, heaviest in mass-market apartments",band:null,
+   fact:"About 120,000 units scheduled for 2026; Fitch warned of up to 15% correction. Q1 2026 delivered only ~43% of scheduled units.",src:"Khaleej Times (Fitch); Real Estate Club Dubai",
+   india:"Bengaluru unsold stock +34% YoY (ANAROCK, Q2 2026). Supply risk is not only a Dubai problem.",
+   risk:"Rents and resale in high-supply areas could soften. Slippage delays the pressure, not cancels it."},
+  {cat:"S",name:"DLD's India roadshows",where:"New Delhi, Mumbai, Bengaluru",band:null,
+   fact:"DLD took Dubai RE connect to Bengaluru on 25 Sep 2026, after New Delhi and Mumbai.",src:"Branford Properties",
+   india:"The regulator, not just developers, is now courting Indian cities.",
+   risk:"Roadshow pitches are sales. Ask for escrow account numbers and RERA project IDs."}
+];
+const PERSONAS=[
+  {k:"T",name:"Bengaluru tech founder",bd:[2,5],goal:"Dollar-linked asset after an ESOP or exit; wants hands-off rent.",av:"B"},
+  {k:"F",name:"Surat business family",bd:[5,10],goal:"Pooled family LRS, legacy asset, maybe a Golden Visa for the next generation.",av:"S"},
+  {k:"H",name:"Mumbai HNI with three flats",bd:[2,10],goal:"Tired of 3-4% gross yields; wants better income on the next crore.",av:"M"},
+  {k:"D",name:"Delhi doctor couple",bd:[1,2],goal:"First buy outside India; two LRS limits; cautious.",av:"D"},
+  {k:"P",name:"Pune IT director",bd:[1,2],goal:"Kids may study abroad; wants a foothold in a dirham asset.",av:"P"},
+  {k:"A",name:"Indian wealth advisor",bd:[1,10],goal:"Needs a straight answer before pitching Dubai to clients.",av:"W"}
+];
+const QUESTIONS=[
+  ["All-in cost in ₹","What will this actually cost me in rupees, with DLD, agent fees and the live rate?"],
+  ["Cash timing","When does money leave India: does the payment plan fit my LRS years and the 20% TCS?"],
+  ["The Indian equivalent","What would the same money buy in my own city, and which is the better asset?"],
+  ["Who rents it","Who is the tenant here, and what is a realistic net yield after service charges?"],
+  ["Exit","Who buys this from me in five years, and how deep is the resale market?"],
+  ["Golden Visa","Does this purchase get my family residency, and on what conditions?"],
+  ["What could go wrong","What is the honest downside, and how would a careful buyer protect themselves?"],
+  ["Tax back home","How are rent and capital gains from this taxed in India, and what must I report?"],
+  ["Trust","Is the developer and escrow solid, and how do I check from India?"]
+];
+const ANGLES=["The number nobody quotes","Myth vs reality","Side-by-side with a surprising winner","What insiders know","Contrarian take, one fact as proof","Hidden cost or hidden rule","Follow the money","Then vs now","The mistake smart people make","One deal, decoded","Who is buying, who is selling","Ranking or league table"];
+const FMT=["LinkedIn post","Carousel","Reel hook","X thread","Data card","WhatsApp explainer"];
+const SOURCES=[
+  ["Cresco Real Estate: Dubai new launches 2026","https://crescorealestate.ae/dubai-new-launches-2026/"],
+  ["RHK Properties: Emaar, DAMAC, Sobha 2026 launches","https://rhkproperties.com/blog/new-property-launches-dubai-emaar-damac-sobha"],
+  ["Engel & Völkers: Top developers in Dubai 2026","https://www.engelvoelkers.com/ae/en/resources/top-10-real-estate-developers-in-dubai"],
+  ["The Luxury Playbook: Dubai projects to watch in 2026","https://theluxuryplaybook.com/dubai-property-projects-to-watch-in-2026/"],
+  ["Off-plan Properties: Palm Jebel Ali 2026","https://off-planproperties.ae/palm-jebel-ali/"],
+  ["Wikipedia: Dubai Islands","https://en.wikipedia.org/wiki/Dubai_Islands"],
+  ["Zeyad Eid: Dubai South investor review 2026","https://zeyadeid.com/off-plan-project-reviews/dubai-south-properties/"],
+  ["Offplan Insider: Dubai off-plan projects 2026","https://offplaninsider.com/areas/dubai/"],
+  ["Khaleej Times: Metro stations could lift land values 15-30%","https://www.khaleejtimes.com/property/new-dubai-metro-stations-to-lift-land-values-rta"],
+  ["Khaleej Times: Blue Line rents in 9 communities","https://www.khaleejtimes.com/business/property/dubai-metro-blue-line-rents-in-9-communities-jump-up-to-43-percent"],
+  ["Property Finder: Metro extensions Dubai","https://www.propertyfinder.ae/blog/metro-extensions-dubai/"],
+  ["Gulf News: Blue Line and Mirdif, Silicon Oasis, Academic City","https://gulfnews.com/business/property/how-dubai-metro-blue-line-still-fuels-real-estate-rush-in-mirdif-silicon-oasis-academic-city-1.500197940"],
+  ["Business Standard: Sunteck enters Dubai","https://www.business-standard.com/amp/companies/news/sunteck-realty-enters-dubai-s-market-with-ultra-luxury-project-pipeline-125112400822_1.html"],
+  ["Enterprise: Sunteck's US$1.2bn Downtown project","https://enterpriseam.com/mena-india/2025/11/26/sunteck-realty-makes-uae-debut-with-usd-1-2-bn-downtown-dubai-project/"],
+  ["Gulf News: Why Indian developers are expanding into the UAE","https://gulfnews.com/business/property/why-indian-property-developers-are-expanding-into-the-uae-1.500385150"],
+  ["Editorji: Indian buyers remain Dubai's largest international group","https://www.editorji.com/amp/business-news/indian-investors-drive-dubai-real-estate-1780034268532"],
+  ["The Week: Indian buyers over 14% of major developers' sales","https://www.theweek.in/news/middle-east/2026/08/04/uae-real-estate-boom-indian-buyers-account-for-over-14percent-of-major-developers-sales.html"],
+  ["BNW Developments: India 14.38% of H1 business","https://bnw.ae/en/news/bnw-developments-plans-10000-homes-uae"],
+  ["Branford Properties: Indian investors lead Dubai 2026","https://branfordproperties.ae/real-estate/indian-investors-dubai-property-2026/"],
+  ["Janus Hermes: Golden Visa through property 2026","https://janushermes.com/blog/uae-golden-visa-property-2026"],
+  ["Real Intel: Golden Visa 2026 investor guide","https://realintel.ae/blog/dubai-golden-visa-property-investment-2026"],
+  ["Nex Consultants: Dubai real estate laws 2026","https://nexconsultants.com/dubai-real-estate-laws-latest-dld-rera-updates/"],
+  ["Khaleej Times: Prices could drop up to 15% (Fitch)","https://www.khaleejtimes.com/business/property/dubai-property-prices-to-drop-after-peak"],
+  ["Real Estate Club Dubai: Handover slippage 2026","https://realestateclubdubai.com/blog/market-analysis/dubai-handover-slippage-2026-only-43-percent-delivered"]
+];
+
+/* ---------- App ---------- */
+const $=id=>document.getElementById(id);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const overlap=(b,p)=>!b||(b[0]<=p[1]&&p[0]<=b[1]);
+let cat="All",per="All",count=5,batch=[];
+const dateStr=new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+$("seg").innerHTML=["All",...Object.keys(CATS)].map(k=>`<button data-k="${k}" class="${k==="All"?"on":""}">${k==="All"?"All":CATS[k].name}</button>`).join("");
+$("pseg").innerHTML=["All",...PERSONAS.map(p=>p.k)].map(k=>`<button data-k="${k}" class="${k==="All"?"on":""}">${k==="All"?"Any":PERSONAS.find(p=>p.k===k).name}</button>`).join("");
+const segClick=(el,set)=>e=>{const k=e.target.dataset.k;if(!k)return;set(k);[...el.children].forEach(x=>x.classList.toggle("on",x.dataset.k===k))};
+$("seg").onclick=segClick($("seg"),k=>cat=k);
+$("pseg").onclick=segClick($("pseg"),k=>per=k);
+$("minus").onclick=()=>{count=Math.max(1,count-1);$("count").value=count};
+$("plus").onclick=()=>{count=Math.min(10,count+1);$("count").value=count};
+
+$("cats").innerHTML=Object.entries(CATS).map(([k,c])=>`<div class="cbox" style="--c:${c.c}"><h3><span>${k}</span> · ${c.name}</h3><ul>${DEVS.filter(d=>d.cat===k).map(d=>`<li><b>${d.name}</b><br>${d.fact}</li>`).join("")}</ul></div>`).join("");
+$("personas").innerHTML=PERSONAS.map(p=>`<div class="pc"><h4>${p.name}</h4><div class="bd">₹${p.bd[0]}-${p.bd[1]} crore</div>${p.goal}</div>`).join("");
+$("qs").innerHTML=QUESTIONS.map(q=>`<div><b>${q[0]}</b>${q[1]}</div>`).join("");
+$("src").innerHTML=SOURCES.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></li>`).join("");
+
+function make(dev,usedQ){
+  const pool=per==="All"?PERSONAS.filter(p=>overlap(dev.band,p.bd)):PERSONAS.filter(p=>p.k===per);
+  const p=pick(pool.length?pool:PERSONAS);
+  const qs=QUESTIONS.filter(q=>!usedQ||!usedQ.has(q[0]));
+  const q=pick(qs.length?qs:QUESTIONS);
+  return{dev,p,q,fit:overlap(dev.band,p.bd),angle:pick(ANGLES),fmt:pick(FMT)};
+}
+function roll(){
+  const pool=DEVS.filter(d=>cat==="All"||d.cat===cat);
+  const devs=shuffle(pool);const usedQ=new Set();
+  batch=[];for(let i=0;i<Math.min(count,devs.length);i++){const it=make(devs[i%devs.length],usedQ);usedQ.add(it.q[0]);batch.push(it)}
+  render();
+}
+function render(){
+  $("out").innerHTML=batch.map((b,i)=>{const d=b.dev,c=CATS[d.cat];return`
+  <article class="card" style="--c:${c.c};animation-delay:${i*70}ms">
+    <div class="head"><div class="cat">${c.name}</div><h3>${d.name}</h3><div class="where">${d.where}</div></div>
+    <div class="fact">${d.fact}<em>Source: ${d.src}</em></div>
+    <div class="vs"><span class="w">India lens</span><span>${d.india}</span></div>
+    <div class="who"><div class="av">${b.p.av}</div><div><b>${b.p.name} · ₹${b.p.bd[0]}-${b.p.bd[1]} cr</b><span>${b.p.goal}</span></div></div>
+    <div class="body">
+      <div class="q"><small>Their question · ${b.q[0]}</small>${b.q[1]}</div>
+      <div class="risk">Name the risk: ${d.risk}</div>
+      <div class="tags">${d.band?`<span class="tag ${b.fit?"fit":"misfit"}">${b.fit?"Budget fits":"Budget stretch: say so"}</span>`:""}<span class="tag">${b.angle}</span><span class="tag">${b.fmt}</span></div>
+      <div class="act"><button data-i="${i}" data-m="one">Copy idea prompt</button><button data-i="${i}" data-m="re">Reroll</button></div>
+    </div>
+  </article>`}).join("");
+  const cnt={};batch.forEach(b=>cnt[b.dev.cat]=(cnt[b.dev.cat]||0)+1);
+  $("legend").innerHTML=Object.keys(cnt).map(k=>`<span><b style="background:${CATS[k].c}"></b>${CATS[k].name} × ${cnt[k]}</span>`).join("")+`<span>Budget fits ${batch.filter(b=>b.fit).length}/${batch.length}</span>`;
+}
+$("out").onclick=e=>{
+  const i=+e.target.dataset.i;if(isNaN(i))return;
+  if(e.target.dataset.m==="one")return copy(prompt([batch[i]]));
+  const pool=DEVS.filter(d=>(cat==="All"||d.cat===cat)&&!batch.some(x=>x.dev===d));
+  batch[i]=make(pool.length?pick(pool):batch[i].dev);render();
+};
+
+const BRIEF=`You are a content strategist and former business journalist writing for Invest Dubai Today, an India-based platform. The reader lives in India (not an NRI) and is weighing a Dubai property purchase funded under LRS. Each idea takes one real Dubai development or market signal and answers one specific question an Indian investor would ask about it, measured against something familiar in India.`;
+const RULES=`Rules:
+- Use only the facts given or ones you can source. Never invent prices, deals, names or quotes. Mark anything unconfirmed [VERIFY: what to check]; anything older than six months [VERIFY: update].
+- Many supplied figures come from broker or marketing blogs. Confirm against DLD, RERA, the developer or primary reporting before treating them as fact.
+- Name the risk on every idea and show how a careful buyer manages it. Credit India's strengths honestly.
+- Money in rupees: all-in cost (DLD 4%, agent and registration fees), AED to INR at the live rate [VERIFY rate].
+- LRS: USD 250,000 per person per financial year; 20% TCS above ₹10 lakh, adjustable at ITR. If the budget exceeds one person's limit, say how (pooled family limits or several years).
+- Golden Visa threshold AED 2M; state conditions and [VERIFY] the Feb 2026 changes.
+- No "guaranteed", "risk-free", "best investment". No em dashes. Net over gross.
+- Banned words: unlock, game-changer, delve, landscape, navigate, elevate, seamless, robust, leverage, journey, realm, testament, revolutionize.`;
+const SPEC=`For each idea give: 1) Hook (max 12 words) 2) Sub-line (max 15 words) 3) The development and the India comparison 4) The answer to the investor's question in two or three sentences 5) The risk and how to manage it 6) Proof points with sources or [VERIFY] 7) Format 8) CTA (one line).`;
+function prompt(items){
+  const lines=items.map((b,i)=>`${i+1}. Development: ${b.dev.name} (${b.dev.where})
+   Facts (refresh before use): ${b.dev.fact} Source: ${b.dev.src}
+   India lens: ${b.dev.india}
+   Investor: ${b.p.name}, budget ₹${b.p.bd[0]}-${b.p.bd[1]} crore all-in. ${b.p.goal}${b.dev.band&&!b.fit?" (Budget stretch: this development sits outside their range, so address that directly or swap the investor.)":""}
+   Their question (${b.q[0]}): ${b.q[1]}
+   Risk to name: ${b.dev.risk}
+   Angle: ${b.angle} | Format: ${b.fmt}`).join("\n");
+  return `${BRIEF}\nToday is ${dateStr}.\n\nWrite ${items.length===1?"this idea":"these "+items.length+" ideas"}:\n${lines}\n\n${SPEC}\n\n${RULES}`;
+}
+$("copyAll").onclick=()=>copy(prompt(batch));
+$("roll").onclick=roll;
+function copy(txt){
+  const done=()=>{$("toast").classList.add("on");setTimeout(()=>$("toast").classList.remove("on"),1400)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,()=>fb(txt,done))}else fb(txt,done);
+}
+function fb(txt,done){const t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand("copy")}catch(e){}t.remove();done()}
+roll();
+</script>
+</body>
+</html>
