@@ -29,11 +29,16 @@ h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:-.
   background:linear-gradient(120deg,rgba(255,159,67,.16),rgba(226,184,107,.06) 55%,rgba(63,193,176,.08))}
 .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--db)}
 .hero h1{font-size:clamp(28px,4.4vw,46px);line-height:1.05;margin:6px 0 10px;color:var(--db2)}
-.hero p{color:var(--soft);max-width:760px;font-size:14px}
+.hero p{color:var(--soft);max-width:780px;font-size:14px}
 .eq{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center;font-size:13px}
 .eq span{padding:5px 11px;border-radius:99px;border:1px solid var(--line);background:rgba(11,17,32,.5)}
 .eq b{color:var(--mute);font:700 16px Fraunces,serif}
 .eq .p{color:var(--in2)} .eq .d{color:var(--db2)} .eq .q{color:#cfc7ff} .eq .a{color:var(--teal)}
+
+.trust{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:22px}
+.trust div{font-size:13px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--soft)}
+.trust b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
+.trust .ok b{color:var(--teal)} .trust .no b{color:var(--rose)} .trust .att b{color:var(--sky)}
 
 .pulse{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:22px}
 .tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
@@ -41,6 +46,7 @@ h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:-.
 .tile .n.w{color:#ffc0b6}
 .tile .l{font-size:12px;color:var(--soft);margin-top:4px}
 .tile .s{font-size:10px;color:var(--mute);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+.tile .s a{color:var(--mute)}
 
 .ctrl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px}
 .lbl{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.1em;margin-right:4px}
@@ -64,7 +70,13 @@ h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:-.
 .head h3{font-size:20px;line-height:1.15;margin:4px 0 2px;color:var(--db2)}
 .head .where{font-size:12px;color:var(--mute)}
 .fact{padding:10px 16px;font-size:13px;color:var(--soft);border-top:1px solid var(--line);background:var(--panel2)}
-.fact em{font-style:normal;color:var(--mute);font-size:11px;display:block;margin-top:3px}
+.fact ul{list-style:none}.fact li{padding:2px 0 2px 12px;position:relative}
+.fact li:before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--c)}
+.srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.srcs a{font-size:11px;text-decoration:none;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--mute)}
+.srcs a:hover{color:var(--db);border-color:var(--db)}
+.srcs a i{font-style:normal;font-weight:600;margin-right:4px}
+.srcs a.o i{color:var(--teal)} .srcs a.n i{color:var(--sky)} .srcs a.x i{color:var(--violet)} .srcs a.d i{color:var(--in)}
 .vs{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:baseline;padding:10px 16px;border-top:1px solid var(--line);font-size:13px}
 .vs .w{font:600 10px Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:5px;background:rgba(255,159,67,.15);color:var(--in)}
 .who{padding:12px 16px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
@@ -101,6 +113,7 @@ h2{font-size:26px;margin-bottom:6px}
 .qs b{display:block;color:#cfc7ff;font:600 15px Fraunces,serif;margin-bottom:2px}
 .src{font-size:12px;color:var(--mute);columns:2 320px;column-gap:24px}
 .src li{margin:0 0 6px 16px;break-inside:avoid}
+.src li i{font-style:normal;color:var(--soft)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--db);color:#1d1406;padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;transition:.3s;z-index:9}
 .toast.on{transform:translateX(-50%) translateY(0)}
 @media (max-width:760px){.go{margin-left:0;width:100%}.go .btn{flex:1}.grid{grid-template-columns:1fr}}
@@ -117,20 +130,19 @@ h2{font-size:26px;margin-bottom:6px}
   <section class="hero">
     <div class="kicker">What is being built, through an Indian buyer's eyes</div>
     <h1>One Dubai development.<br>One Indian investor. One question.</h1>
-    <p>Each card pairs a real 2026 Dubai development or market signal with an India-based investor and the question they would actually ask before wiring money under LRS. Figures are starting points from public reporting, marked with their source. Verify before publishing.</p>
+    <p>Each card pairs a 2026 Dubai development or market signal with an India-based investor and the question they would ask before sending money under LRS. Every fact links to Dubai Land Department, another government source, DXBinteract or a reputed news outlet. 2026 has been a year of war-driven caution in Dubai, so the cards say so.</p>
     <div class="eq"><span class="d">Dubai development</span><b>+</b><span class="p">Indian investor</span><b>+</b><span class="q">Their real question</span><b>=</b><span class="a">One idea</span></div>
   </section>
 
-  <h2>Market pulse <span class="asof">researched Nov 2026 · verify before use</span></h2>
-  <p class="sub">The backdrop every idea sits against.</p>
-  <div class="pulse">
-    <div class="tile"><div class="n">20.6%</div><div class="l">Indians' share of Dubai buying activity, largest foreign group</div><div class="s">Harbor / DXBinteract · H1 2026</div></div>
-    <div class="tile"><div class="n">AED 252bn</div><div class="l">Dubai transactions, +31% YoY; 29,312 new investors</div><div class="s">DLD · Q1 2026</div></div>
-    <div class="tile"><div class="n">104</div><div class="l">Projects completed, +38.7% YoY</div><div class="s">DLD · H1 2026</div></div>
-    <div class="tile"><div class="n w">~120,000</div><div class="l">Units scheduled for handover in 2026; Fitch flagged up to 15% price correction</div><div class="s">Fitch · 2025 forecast</div></div>
-    <div class="tile"><div class="n w">43%</div><div class="l">Of Q1 2026 scheduled units actually delivered (12,900 of ~30,300)</div><div class="s">Real Estate Club Dubai</div></div>
-    <div class="tile"><div class="n">25 Sep</div><div class="l">DLD "Dubai RE connect" roadshow in Bengaluru, after Delhi and Mumbai</div><div class="s">2026</div></div>
+  <div class="trust">
+    <div class="ok"><b>Sources used</b>Dubai Land Department, Dubai Media Office, WAM, RTA, DXBinteract; The National, Arabian Business, Zawya news, Bloomberg, Khaleej Times, Gulf News, AGBI, Business Standard.</div>
+    <div class="att"><b>Attribute industry data</b>Figures from Cavendish Maxwell, Knight Frank, S&amp;P, Fitch, Anarock or Savills appear as reported by those outlets. Name both.</div>
+    <div class="no"><b>Not used</b>Broker or developer blogs, press releases, sponsored content, listing portals' marketing pages.</div>
   </div>
+
+  <h2>Market pulse <span class="asof">researched 16 Nov 2026 · verify before use</span></h2>
+  <p class="sub">The backdrop every idea sits against. A record first quarter, then a sharp third-quarter slowdown.</p>
+  <div class="pulse" id="pulse"></div>
 
   <div class="ctrl">
     <span class="lbl">Development type</span>
@@ -158,151 +170,213 @@ h2{font-size:26px;margin-bottom:6px}
   <div class="qs" id="qs"></div>
 
   <h2>Sources</h2>
-  <p class="sub">Several are broker or marketing blogs. Treat their numbers as leads, and confirm against DLD, RERA, the developer or primary reporting.</p>
+  <p class="sub">Every link used on this page. Re-check any figure older than six months before it goes out.</p>
   <ul class="src" id="src"></ul>
 </div>
 <div class="toast" id="toast">Copied</div>
 
 <script>
-/* ---------- Research data (Nov 2026) ---------- */
-const CATS={
-  M:{name:"Master communities",c:"var(--db)"},
-  W:{name:"Waterfront and islands",c:"var(--sky)"},
-  I:{name:"Infrastructure corridors",c:"var(--teal)"},
-  B:{name:"Indian-linked developers",c:"var(--in)"},
-  S:{name:"Rules and market signals",c:"var(--violet)"}
+/* ---------- Sources (official, DXBinteract, reputed news only) ---------- */
+/* t: o = official, d = DXBinteract, n = news, x = industry data reported by news */
+const S={
+  dldQ1:{t:"o",l:"Dubai Land Department, 9 Apr 2026",u:"https://dubailand.gov.ae/en/news-media/dubai-s-real-estate-transactions-surge-31-to-reach-aed-252-billion-in-q1-2026/"},
+  dldRent:{t:"o",l:"Dubai Land Department: rental market",u:"https://dubailand.gov.ae/en/news-media/dubai-s-rental-market-charts-stable-trajectory-reflecting-integrated-regulatory-environment-and-sustained-public-confidence/"},
+  dmoToken:{t:"o",l:"Dubai Media Office, 9 Feb 2026",u:"https://www.mediaoffice.ae/en/news/2026/february/09-02/dubai-land-department-launches"},
+  dmoBlue:{t:"o",l:"Dubai Media Office (RTA), Nov 2025",u:"https://www.mediaoffice.ae/en/news/2025/november/09-11/rta"},
+  wamPJA:{t:"o",l:"WAM: Frond F villas",u:"https://www.wam.ae/en/article/c1tv9cp-nakheel-unveils-limited-collection-beachfront"},
+  dxbNat:{t:"d",l:"DXBinteract: buyers by nationality",u:"https://dxbinteract.com/news/dubai-residential-market-2025-top-foreign-investor-nationalities"},
+  natQ3:{t:"x",l:"The National, 7 Oct 2026 (Cavendish Maxwell, S&P)",u:"https://www.thenationalnews.com/business/property/2026/10/07/dubai-home-sale-transactions-fall-in-third-quarter-due-to-regional-uncertainty/"},
+  agbiLaunch:{t:"x",l:"AGBI, Oct 2026 (Savills)",u:"https://www.agbi.com/analysis/real-estate/2026/10/dubais-off-plan-launch-drought-shows-up-in-tumbling-sales/"},
+  natLux:{t:"x",l:"The National, 21 Oct 2026 (Knight Frank)",u:"https://www.thenationalnews.com/business/property/2026/10/21/dubai-records-86-deals-for-10m-homes-in-q3-as-wealthy-flock-despite-iran-war/"},
+  bbgLux:{t:"n",l:"Bloomberg, 20 Oct 2026",u:"https://www.bloomberg.com/news/articles/2026-10-20/dubai-luxury-home-sales-fall-from-record-levels-as-war-drags-on"},
+  natSuper:{t:"n",l:"The National, 13 Nov 2026",u:"https://www.thenationalnews.com/news/uae/2026/11/13/dubais-super-prime-property-sales-cling-on-to-global-top-spot/"},
+  natFitch:{t:"x",l:"The National, May 2025 (Fitch)",u:"https://www.thenationalnews.com/business/2025/05/29/dubai-property-prices-expected-to-fall-by-15-on-supply-glut-this-year-fitch-says/"},
+  ktSupply:{t:"n",l:"Khaleej Times: oversupply in 2026?",u:"https://www.khaleejtimes.com/business/property/will-dubai-housing-market-see-an-oversupply-in-2026"},
+  ktRent:{t:"x",l:"Khaleej Times (Cavendish Maxwell, Q3 2026)",u:"https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply"},
+  abRentCalc:{t:"n",l:"Arabian Business: rent increase rules",u:"https://www.arabianbusiness.com/real-estate/dubai-landlord-rent-calculator"},
+  ktQ1Rent:{t:"n",l:"Khaleej Times: Q1 rental contracts",u:"https://www.khaleejtimes.com/business/property/dubai-leasing-activity-steady-as-q1-rental-contracts-hit-dh322b"},
+  natEmaar200:{t:"n",l:"The National, 11 Jun 2026",u:"https://www.thenationalnews.com/business/property/2026/06/11/emaar-to-launch-dh200bn-megaproject-in-dubai-set-to-house-150000-people/"},
+  agbiEstate:{t:"n",l:"AGBI, Jul 2026",u:"https://www.agbi.com/real-estate/2026/07/emaars-unnamed-megaproject-tipped-to-be-54bn-dubai-estate/"},
+  gnEmaarH1:{t:"n",l:"Gulf News: Emaar H1 2026 results",u:"https://gulfnews.com/business/property/emaar-books-dh266-billion-in-property-sales-backlog-climbs-to-dh1649-billion-1.500633439"},
+  agbiEmaarQ3:{t:"n",l:"AGBI, Nov 2026",u:"https://www.agbi.com/real-estate/2026/11/emaar-properties-backlog-shrinks-as-new-sales-slow/"},
+  natEmaarQ3:{t:"n",l:"The National, 5 Nov 2026",u:"https://www.thenationalnews.com/business/property/2026/11/05/emaar-properties-reports-56-increase-in-q3-profit-on-revenue-boost/"},
+  natFootfall:{t:"n",l:"The National, 12 Nov 2026",u:"https://www.thenationalnews.com/business/property/2026/11/12/emaars-mall-footfall-down-10-per-cent-due-to-iran-war-says-alabbar/"},
+  natPalmSprings:{t:"n",l:"The National, 10 Nov 2026",u:"https://www.thenationalnews.com/business/property/2026/11/10/nakheel-unveils-mega-development-for-50000-residents-in-dubai/"},
+  abPalmSprings:{t:"n",l:"Arabian Business: Palm Springs",u:"https://www.arabianbusiness.com/real-estate/dubai-reveals-huge-palm-springs-project-to-house-50000-near-jebel-ali"},
+  natPCPR:{t:"n",l:"The National, 24 Jun 2026",u:"https://www.thenationalnews.com/business/property/2026/06/24/nakheel-launches-222-homes-for-sale-at-palm-jebel-ali-with-prices-from-dh27m/"},
+  natPJA:{t:"n",l:"The National, 12 Jan 2026",u:"https://www.thenationalnews.com/news/uae/2026/01/12/palm-jebel-ali-megaproject-takes-root-with-units-on-track-for-2027/"},
+  agbiPJA:{t:"n",l:"AGBI, Nov 2026",u:"https://www.agbi.com/analysis/real-estate/2026/11/palm-jebel-ali-defies-dubai-property-slowdown/"},
+  zDamac:{t:"n",l:"Zawya: DAMAC Q1 2026",u:"https://www.zawya.com/en/projects/construction/dubai-developer-damac-sells-3-663-units-in-q1-2026-pat4jlor"},
+  ktMarch:{t:"n",l:"Khaleej Times: sales continue despite conflict",u:"https://www.khaleejtimes.com/business/property/dubai-property-sales-construction-continue-iran-israel-war"},
+  ktSobha:{t:"n",l:"Khaleej Times: Sobha handovers",u:"https://www.khaleejtimes.com/business/property/sobha-realty-targets-record-6819-home-handovers-in-dubai-as-delivery-focus-sharpens"},
+  natSobha50:{t:"n",l:"The National, 26 Jan 2026",u:"https://www.thenationalnews.com/business/property/2026/01/26/dubais-sobha-unveils-dh50bn-project-as-ceo-says-property-prices-will-grow/"},
+  natSobhaAD:{t:"n",l:"The National, 13 Apr 2026",u:"https://www.thenationalnews.com/business/property/2026/04/13/sobha-enters-abu-dhabi-with-dh40bn-project-amid-expectations-of-minimal-long-term-war-impact/"},
+  natDWC:{t:"n",l:"The National, 15 Jun 2026",u:"https://www.thenationalnews.com/news/uae/2026/06/15/dubais-al-maktoum-airport-expansion-on-track-for-2032-launch-with-dh55bn-of-contracts-to-be-awarded-this-year/"},
+  natDWC55:{t:"n",l:"The National, 26 Aug 2026",u:"https://www.thenationalnews.com/business/aviation/2026/08/26/dubai-to-award-dh55bn-in-contracts-by-year-end-for-al-maktoum-airport-expansion/"},
+  natDWCMetro:{t:"n",l:"The National, 10 Nov 2026",u:"https://www.thenationalnews.com/news/uae/2026/11/10/sheikh-hamdan-dubai-metro-connect-al-maktoum-airport/"},
+  gnEmirates:{t:"n",l:"Gulf News: Emirates at Dubai South",u:"https://gulfnews.com/business/aviation/how-emirates-is-preparing-for-life-after-dxb-with-dubai-south-expansion-1.500545862"},
+  gnBlue:{t:"n",l:"Gulf News: Blue Line 12% complete",u:"https://gulfnews.com/uae/transport/dubai-metro-blue-line-reaches-12-per-cent-completion-on-track-for-2029-launch-1.500382712"},
+  natBlueTunnel:{t:"n",l:"The National, 9 Jul 2026",u:"https://www.thenationalnews.com/news/uae/2026/07/09/dubai-metro-blue-line-tunnelling/"},
+  abBlue:{t:"n",l:"Arabian Business: Blue Line guide",u:"https://www.arabianbusiness.com/industries/transport/dubai-metro-blue-line-construction-progress-opening-date-stations-and-journey-times"},
+  abGV:{t:"n",l:"Arabian Business: Golden Visa and mortgages",u:"https://www.arabianbusiness.com/life/uae-golden-visa-mortgaged-property"},
+  abGVunify:{t:"n",l:"Arabian Business: residency services unified",u:"https://www.arabianbusiness.com/real-estate/dubai-unifies-golden-visa-property-and-retiree-residency-services-in-new-government-integration-push"},
+  natToken:{t:"n",l:"The National, 9 Feb 2026",u:"https://www.thenationalnews.com/business/property/2026/02/09/dubai-property-tokenisation-fractional-investing/"},
+  ktIndia:{t:"x",l:"Khaleej Times (Harbor, citing DXBinteract)",u:"https://www.khaleejtimes.com/business/indian-uk-egyptian-investors-top-dubai-property-buyers-in-2026"},
+  ktAnarock:{t:"x",l:"Khaleej Times (Anarock, H1 2026)",u:"https://www.khaleejtimes.com/business/property/dubai-property-market-deals-indians-britons-top-buyers"},
+  abTenants:{t:"n",l:"Arabian Business: Indian, British tenants",u:"https://www.arabianbusiness.com/real-estate/indians-and-britons-largest-tenant-groups-in-dubais-rental-market"},
+  agbiHedge:{t:"n",l:"AGBI, Aug 2026",u:"https://www.agbi.com/analysis/real-estate/2026/08/uae-indians-hedge-against-war-with-property-back-home/"},
+  bsPause:{t:"n",l:"Business Standard, Mar 2026",u:"https://www.business-standard.com/industry/news/west-asia-conflicts-indians-pause-not-pull-out-of-dubai-real-estate-126030201101_1.html"},
+  bsTrophy:{t:"n",l:"Business Standard, Mar 2026",u:"https://www.business-standard.com/industry/news/dubai-on-the-edge-indian-hnis-don-t-loosen-grip-on-trophy-assets-126032900349_1.html"},
+  bbgBonds:{t:"n",l:"Bloomberg, 26 Mar 2026",u:"https://www.bloomberg.com/news/articles/2026-03-26/uae-developers-rush-to-reassure-investors-wary-of-iran-war-risk"},
+  zSunteck:{t:"n",l:"Zawya: Sunteck enters UAE",u:"https://www.zawya.com/en/economy/gcc/indian-luxury-real-estate-group-sunteck-enters-uae-market-y1hvcywq"},
+  abSunteck:{t:"n",l:"Arabian Business: Sunteck at Burj Khalifa",u:"https://www.arabianbusiness.com/industries/real-estate/indias-sunteck-realty-begins-its-global-ambitions-at-the-footsteps-of-burj-khalifa"},
+  bsSunteck:{t:"n",l:"Business Standard: Sunteck Dubai pipeline",u:"https://www.business-standard.com/companies/news/sunteck-realty-enters-dubai-s-market-with-ultra-luxury-project-pipeline-125112400822_1.html"},
+  bsSunteck100:{t:"n",l:"Business Standard: ₹100 cr homes, Sep 2025",u:"https://www.business-standard.com/finance/personal-finance/homes-at-100-cr-sunteck-realty-plans-ultra-luxury-houses-in-mumbai-dubai-125092900134_1.html"}
 };
-/* band: indicative ₹ crore range a buyer would need; null = applies to any budget */
+const TL={o:"Official",d:"DXBinteract",n:"News",x:"Industry via news"};
+
+const PULSE=[
+  {n:"AED 252bn",l:"Dubai real estate transactions in Q1 2026, up 31% YoY; 60,303 transactions",s:"dldQ1"},
+  {n:"−47%",w:1,l:"Q3 2026 home sales value YoY, to Dh72.6bn; deals −38% to 34,000",s:"natQ3"},
+  {n:"5–15%",w:1,l:"Price fall from end-2025 to Sep 2026, per S&P citing industry reports",s:"natQ3"},
+  {n:"~5,300",w:1,l:"Homes launched in Q2 2026, vs 45,000+ in Q1 (Savills)",s:"agbiLaunch"},
+  {n:"21.4%",w:1,l:"Rental transactions with a rent cut in Q3, up from 4.8% in Q1",s:"ktRent"},
+  {n:"20.6%",l:"Indians' estimated share of purchasing activity, early 2026; largest foreign group",s:"ktIndia"}
+];
+
+const CATS={
+  M:{name:"Master communities and developers",c:"var(--db)"},
+  W:{name:"Waterfront and prime",c:"var(--sky)"},
+  I:{name:"Infrastructure corridors",c:"var(--teal)"},
+  B:{name:"Indian money and Indian developers",c:"var(--in)"},
+  S:{name:"Market signals and rules",c:"var(--violet)"}
+};
+/* band: indicative ₹ crore a buyer needs; null = applies to any budget */
 const DEVS=[
-  {cat:"M",name:"Emaar's new mega-community",where:"Southeast of Dubai Hills Estate · Emaar",band:[2,10],
-   fact:"Announced 11 Jun 2026: about AED 200bn, roughly 4.5M sq m, room for about 150,000 residents.",src:"Cresco Real Estate launch list",
-   india:"Large integrated townships such as Lodha Palava or Godrej's township plans: phase-one buyers bet on the master plan.",
-   risk:"Early phases price in a plan, not a finished city. Decade-long build-out."},
-  {cat:"M",name:"Emaar South golf launches",where:"Golf Vale, Golf Trails, Golf Fields · Dubai South",band:[1,5],
-   fact:"Listed among Emaar's 2026 launches, beside the Al Maktoum airport and Expo City corridor.",src:"Cresco Real Estate launch list",
-   india:"Dwarka Expressway and Jewar-side Noida: housing sold on the strength of a future airport.",
-   risk:"Value depends on the airport timeline. Handover wave in the same corridor."},
-  {cat:"M",name:"DAMAC Lagoons and DAMAC Hills",where:"Mykonos townhomes; DAMAC District final collection · DAMAC",band:[2,5],
-   fact:"DAMAC's 2026 launches lean on themed villa clusters and final phases of existing communities.",src:"Cresco / RHK Properties launch lists",
-   india:"Gated villa plots on Sarjapur Road or Golf Course Extension Road.",
-   risk:"Themed communities far from jobs: check rent demand and service charges per sq ft."},
-  {cat:"M",name:"Sobha Hartland II and Sobha Reserve",where:"MBR City and Dubailand · Sobha Realty",band:[2,10],
-   fact:"Sobha's pipeline centres on the Hartland ecosystem, plus Sobha Reserve villas and Sobha Central on Sheikh Zayed Road.",src:"Engel & Völkers; RHK Properties",
-   india:"Sobha Ltd's own Bengaluru projects: same founder lineage, very different market.",
-   risk:"Brand familiarity is not a yield. Compare service charges and rent comps in Hartland."},
-  {cat:"W",name:"Palm Jebel Ali",where:"Jebel Ali coast · Nakheel",band:[5,10],
-   fact:"Relaunched 2023; 16 fronds across seven islands, phased handovers. One report puts villas from about AED 18.5M [VERIFY]. Palm Central Private Residences listed for 2026.",src:"Off-plan Properties; The Luxury Playbook",
-   india:"Alibaug and sea-facing Worli: scarcity of real waterfront.",
-   risk:"Ticket far above one person's LRS limit. Long timeline; seller claims of a discount to Palm Jumeirah are unverified."},
-  {cat:"W",name:"Dubai Islands",where:"Off Deira coast · Nakheel",band:[2,5],
-   fact:"Early-stage coastal master plan. Chennai's Casagrand entered here with Casagrand Hermina.",src:"Wikipedia; Gulf News; GeoSquare",
-   india:"Buying early in Navi Mumbai before the airport and trans-harbour link.",
-   risk:"Amenities and rental demand still ramping up. Early resale market is thin."},
-  {cat:"W",name:"Rashid Yachts and Marina",where:"Port Rashid · Emaar",band:[2,10],
-   fact:"Fior 1 and Sera 1 among Emaar's 2026 releases in this marina district.",src:"Cresco Real Estate launch list",
-   india:"Mumbai's eastern waterfront redevelopment talk vs a marina that is actually being built.",
-   risk:"Waterfront premium already in launch price. Verify service charges on marina amenities."},
-  {cat:"I",name:"Dubai South and Al Maktoum International",where:"Dubai South",band:[1,2],
-   fact:"Planned as one of the world's largest airports (reported US$35bn programme). One guide puts Dubai South at about AED 750 to 850 per sq ft in early 2026 vs AED 2,000+ in premium districts [VERIFY].",src:"Zeyad Eid; Offplan Insider",
-   india:"Noida International Airport (Jewar) began commercial operations on 15 Jun 2026. Same airport-led story, two cities.",
-   risk:"5 to 10 year bet. Airport phasing and the 2026 handover wave both weigh on near-term rents."},
-  {cat:"I",name:"Metro Blue Line corridor",where:"Mirdif, Silicon Oasis, Academic City, Creek · RTA",band:[1,2],
-   fact:"30 km, 14 stations, opening due 9 Sep 2029. RTA projects land values near stations up 15 to 30%. Rents in nine linked communities rose about 23% after the Nov 2023 announcement.",src:"Khaleej Times; Property Finder; Gulf News",
-   india:"Bengaluru Purple Line and Mumbai Metro Line 3: prices moved on announcement, not opening.",
-   risk:"Much of the uplift may already be priced in. Opening is three years out."},
-  {cat:"I",name:"Expo City Dubai",where:"Expo City · Dubai South corridor",band:[1,5],
-   fact:"Own metro station; recent launches reported with 10% on booking.",src:"Offplan Insider / agent guides",
-   india:"Post-event city reuse, like GIFT City's slow-then-steady occupancy.",
-   risk:"Check how much of the payment plan falls before handover vs your LRS years."},
-  {cat:"B",name:"Sunteck Realty's Downtown Dubai towers",where:"Downtown Dubai · Sunteck with MAS Real Estate",band:[5,10],
-   fact:"Mumbai developer's first Dubai project: two towers on 2.5 acres, branded residences, GDV close to ₹10,000 crore, launch targeted 2026 [VERIFY launch status].",src:"Business Standard; Enterprise; GeoSquare",
-   india:"The BKC / ODC Goregaon developer, now selling in Downtown. Same brand, AED pricing.",
-   risk:"First project outside India: no Dubai delivery record yet. Check escrow and the local partner's track record."},
-  {cat:"B",name:"Casagrand Hermina",where:"Dubai Islands · Casagrand (Chennai)",band:[2,5],
-   fact:"Chennai developer's UAE entry in 2025; Hermina won off-plan project awards in 2026.",src:"Gulf News; GeoSquare",
-   india:"A developer Chennai buyers already know, building abroad.",
-   risk:"Awards are not delivery. First Dubai handover still ahead."},
-  {cat:"B",name:"W Residences, JLT",where:"Jumeirah Lake Towers · Signature Developers with Marriott",band:[2,5],
-   fact:"Raju Shroff's Signature Developers with Marriott: 180+ branded apartments.",src:"Gulf News",
-   india:"Branded residences in India (Trump Towers, Four Seasons Worli) vs a branded flat in JLT.",
-   risk:"Branded premium and higher service charges. Compare net yield with an unbranded JLT unit."},
-  {cat:"B",name:"Indian buyers at Dubai developers",where:"Market-wide",band:null,
-   fact:"Indians 20.6% of buying activity in H1 2026 (Harbor/DXBinteract); 22% of foreign buyers in 2025 (Real Estate Club Dubai); India 14.38% of BNW Developments' H1 business.",src:"Editorji; Branford; BNW; The Week",
-   india:"Who your neighbours will be, and who buys from you at exit.",
-   risk:"Nationality shares come from brokers' readings of DLD data, not an official DLD series."},
-  {cat:"S",name:"Golden Visa: Feb 2026 rule change",where:"UAE federal / DLD",band:[2,10],
-   fact:"Threshold still AED 2M. A Feb 2026 circular reportedly removed the AED 1M upfront requirement; mortgaged (with bank NOC) and off-plan units can qualify on DLD value [VERIFY with ICP/DLD].",src:"Janus Hermes; Real Intel; Upper Setup",
-   india:"A ₹4.5 crore-plus buy that comes with 10-year family residency.",
-   risk:"AED 2M at today's rate exceeds one person's annual LRS. Rules quoted mostly by consultants."},
-  {cat:"S",name:"DLD tokenisation, Phase II",where:"Dubai Land Department",band:[0,1],
-   fact:"Phase II launched Feb 2026, allowing secondary resale within a controlled pilot.",src:"Nex Consultants",
-   india:"Fractional ownership platforms under SEBI's SM-REIT rules vs Dubai title-backed tokens.",
-   risk:"[VERIFY whether an India resident can buy property tokens under LRS/ODI rules.] Pilot scale only."},
-  {cat:"S",name:"The 2026 handover wave",where:"Market-wide, heaviest in mass-market apartments",band:null,
-   fact:"About 120,000 units scheduled for 2026; Fitch warned of up to 15% correction. Q1 2026 delivered only ~43% of scheduled units.",src:"Khaleej Times (Fitch); Real Estate Club Dubai",
-   india:"Bengaluru unsold stock +34% YoY (ANAROCK, Q2 2026). Supply risk is not only a Dubai problem.",
-   risk:"Rents and resale in high-supply areas could soften. Slippage delays the pressure, not cancels it."},
-  {cat:"S",name:"DLD's India roadshows",where:"New Delhi, Mumbai, Bengaluru",band:null,
-   fact:"DLD took Dubai RE connect to Bengaluru on 25 Sep 2026, after New Delhi and Mumbai.",src:"Branford Properties",
-   india:"The regulator, not just developers, is now courting Indian cities.",
-   risk:"Roadshow pitches are sales. Ask for escrow account numbers and RERA project IDs."}
+  {cat:"M",name:"Emaar's Dh200bn megaproject",where:"Dubai · Emaar · location not formally disclosed",band:[2,10],
+   facts:["Announced 11 Jun 2026: more than 4.5M sq m built-up area, homes for nearly 150,000 residents.","At announcement Emaar did not disclose the location, unit count or sale date.","AGBI (Jul 2026) reported it is tipped to be the Dubai Estate masterplan; agents had no pricing or timelines."],
+   src:["natEmaar200","agbiEstate"],
+   india:"Integrated townships such as Lodha Palava: early buyers bet on a master plan.",
+   risk:"No price, no launch date, no location confirmed. Anything specific is speculation until Emaar says so."},
+  {cat:"M",name:"Emaar's 2026 launch pipeline",where:"Emaar South, Dubai Hills Estate, The Heights Country Club, The Oasis, Rashid Yachts & Marina, Expo Living",band:[1,10],
+   facts:["11 projects launched in H1 2026; group property sales Dh26.6bn in H1, revenue backlog Dh164.9bn.","AGBI (Nov 2026): backlog shrinking as new sales slow.","Founder Mohamed Alabbar estimated a 5 to 10% sector adjustment; mall footfall down about 10% due to the Iran war."],
+   src:["gnEmaarH1","agbiEmaarQ3","natQ3","natFootfall"],
+   india:"DLF and Godrej presales and backlog: the same health check Indian investors already read.",
+   risk:"Sales momentum faded in Q3. Check launch prices against recent resale prices in the same community."},
+  {cat:"M",name:"Nakheel's Palm Springs",where:"Next to Palm Jebel Ali · Nakheel",band:null,
+   facts:["Unveiled 10 Nov 2026: 3.8M sq m masterplan for about 50,000 residents across 15 neighbourhoods.","Nakheel did not disclose investment value or completion timeline."],
+   src:["natPalmSprings","abPalmSprings"],
+   india:"A new suburb announced beside a flagship project, like plotted launches around Navi Mumbai's airport.",
+   risk:"Nothing on sale or priced yet. A story about direction, not a purchase."},
+  {cat:"M",name:"DAMAC in a war year",where:"Dubai · DAMAC",band:[1,5],
+   facts:["Sold 3,663 residential units in Q1 2026; said construction on schedule with no handover changes.","Led Dubai developers in March 2026 with Dh3.12bn sales across 1,106 transactions."],
+   src:["zDamac","ktMarch","bbgBonds"],
+   india:"Brand-led sales machines like Lodha: volume is not the same as resale strength.",
+   risk:"Delivery claims are developer-reported. Bloomberg reported UAE developer bonds slipping into distress in March 2026."},
+  {cat:"M",name:"Sobha's record handover year",where:"Dubai and Abu Dhabi · Sobha Realty",band:[2,10],
+   facts:["Targets a record 6,819 Dubai home handovers in 2026.","Unveiled a Dh50bn Dubai project in Jan 2026; entered Abu Dhabi with a Dh40bn project in Apr 2026."],
+   src:["ktSobha","natSobha50","natSobhaAD"],
+   india:"Founded by India-born PNC Menon, the name behind Sobha Ltd in Bengaluru.",
+   risk:"Record handovers add ready supply into a cooling rental market. Check targets against actual completions."},
+  {cat:"W",name:"Palm Central Private Residences",where:"Palm Jebel Ali · Nakheel",band:[5,10],
+   facts:["Jun 2026 release: 222 homes; one-bedroom from Dh2.7M, townhouses from Dh14.9M; completion by Sep 2030.","Dh2.7M is about ₹6.5 crore at ₹24/AED [VERIFY rate], above the AED 2M Golden Visa threshold."],
+   src:["natPCPR"],
+   india:"A sea-facing ticket like Worli's, from a single starting price.",
+   risk:"Needs about three person-years of LRS. Completion is almost four years out."},
+  {cat:"W",name:"Palm Jebel Ali villas",where:"Palm Jebel Ali fronds · Nakheel",band:[30,500],
+   facts:["44 beachfront villas on Frond F; phased handover from late 2026 into 2027.","Nakheel has awarded more than AED 13bn in construction and infrastructure contracts.","AGBI (Nov 2026): Palm Jebel Ali defies the wider Dubai slowdown."],
+   src:["wamPJA","natPJA","agbiPJA"],
+   india:"Trophy homes Indian HNIs buy in Alibaug or Lutyens Delhi.",
+   risk:"Ultra-prime ticket, far beyond any single family's annual LRS. Thin resale market at this level."},
+  {cat:"W",name:"Dubai's $10M-plus homes",where:"Dubai's prime neighbourhoods",band:[85,1000],
+   facts:["86 sales of $10M-plus homes in Q3 2026, down 17% YoY and 34% vs Q2 (Knight Frank).","Prime prices across 10 prime neighbourhoods fell 5% quarter on quarter, the first drop since 2020.","Dubai remained the world's busiest super-prime market by number of sales."],
+   src:["natLux","bbgLux","natSuper"],
+   india:"Business Standard: Indian HNIs did not loosen their grip on Dubai trophy assets after the conflict began.",
+   risk:"First prime price fall since 2020. Knight Frank called the regional conflict the biggest drag."},
+  {cat:"I",name:"Al Maktoum International Airport",where:"Dubai South · Dubai Airports",band:[1,5],
+   facts:["Phase one targeted for 2032 at 150M passengers a year; full build-out 260M.","About Dh13bn of contracts awarded in 2026 so far, Dh55bn more planned by year end.","10 Nov 2026: Dh2bn Metro extension to the West Terminal approved, service expected 2031. Airline operations to move from DXB between 2032 and 2035.","Emirates is building a $5.1bn engineering complex at Dubai South, due by 2030."],
+   src:["natDWC","natDWC55","natDWCMetro","gnEmirates"],
+   india:"Noida International Airport (Jewar) began commercial operations on 15 Jun 2026 [VERIFY]. Same airport-led housing story.",
+   risk:"2032 is an official target. Homes near it are a five-to-ten year bet with rent depending on the move from DXB."},
+  {cat:"I",name:"Dubai Metro Blue Line",where:"Mirdif, Silicon Oasis, Academic City, International City, Creek · RTA",band:[1,2],
+   facts:["Dh20.5bn, 30 km, opening due 9 Sep 2029.","12% complete by Dec 2025, targeting 30% by end-2026; first tunnelling phase finished Jul 2026.","RTA projects values near stations could rise by up to 25%. That is a projection, not a measured result."],
+   src:["abBlue","gnBlue","natBlueTunnel","dmoBlue"],
+   india:"Bengaluru and Mumbai metro lines: prices often move on announcement, long before opening.",
+   risk:"The 25% figure is the RTA's own estimate. Opening is nearly three years away."},
+  {cat:"B",name:"How big Indian buying really is",where:"Market-wide",band:null,
+   facts:["Indians an estimated 20.6% of purchasing activity in early 2026, ahead of the UK (13.3%) and Egypt (12.6%), per Harbor citing DXBinteract.","Anarock: Indians and Britons drove H1 2026 deals of Dh225.7bn.","DXBinteract notes DLD publishes no public dataset of buyers by nationality."],
+   src:["ktIndia","ktAnarock","dxbNat"],
+   india:"Who your neighbours, tenants and eventual buyers are likely to be.",
+   risk:"Every nationality share is an estimate. None is an official DLD statistic."},
+  {cat:"B",name:"Indian money pauses, not exits",where:"India and UAE",band:null,
+   facts:["Business Standard (Mar 2026): Indians press pause, not pull out, on Dubai real estate.","AGBI (Aug 2026): Lodha's CEO said about $3.7bn flowed from India into Dubai real estate last year and a material part will now stay in India.","Some buyers are negotiating harder or moving from off-plan to completed homes."],
+   src:["bsPause","agbiHedge","bsTrophy"],
+   india:"The same family weighing a Mumbai flat against a Dubai one, now with war risk in the mix.",
+   risk:"Sentiment can turn either way. The $3.7bn figure is one developer's estimate."},
+  {cat:"B",name:"Sunteck Realty in Downtown Dubai",where:"Downtown Dubai · Sunteck International",band:[50,500],
+   facts:["Mumbai-listed Sunteck set up Sunteck International in Dubai and revealed a Downtown site near Burj Khalifa in Nov 2025.","Flagship GDV estimated at AED 5bn ($1.36bn); UAE pipeline over Dh15bn across three years; branded residences planned.","Business Standard (Sep 2025) reported launches targeted for June 2026 [VERIFY: whether sales have opened and at what price]."],
+   src:["zSunteck","abSunteck","bsSunteck","bsSunteck100"],
+   india:"The BKC and ODC Goregaon developer, now pricing in dirhams.",
+   risk:"No Dubai delivery record yet. Confirm RERA project registration and escrow before any booking."},
+  {cat:"S",name:"The third-quarter slowdown",where:"Market-wide",band:null,
+   facts:["Q3 2026 home sales Dh72.6bn, down 47% YoY; 34,000 deals, down 38% (Cavendish Maxwell).","S&P: prices fell 5 to 15% from end-2025 to Sep 2026; apartments expected to fall faster than villas.","Developers launched about 5,300 homes in Q2 vs 45,000+ in Q1 (Savills)."],
+   src:["natQ3","agbiLaunch"],
+   india:"The same buy-now-or-wait call Indian buyers face whenever their own city goes through a slow patch.",
+   risk:"If the conflict drags on, the correction can deepen. Do not call a bottom."},
+  {cat:"S",name:"The handover wave",where:"Market-wide, heaviest in apartments",band:null,
+   facts:["Fitch (May 2025) forecast up to 15% correction with about 120,000 handovers in 2026.","Khaleej Times cites other estimates of about 55,000 handovers in 2026 and 75,000 in 2027."],
+   src:["natFitch","ktSupply"],
+   india:"Bengaluru unsold stock up 34% YoY (ANAROCK, Q2 2026, from the main data bank). Supply risk is not only a Dubai issue.",
+   risk:"Estimates of 2026 handovers differ by more than half. Delays push supply into later years rather than remove it."},
+  {cat:"S",name:"Rents start to ease",where:"Market-wide · DLD Rental Index",band:[1,5],
+   facts:["Q3 2026: 21.4% of rental transactions saw a cut, up from 4.8% in Q1; increases fell to 40% from 59.4% (Cavendish Maxwell).","Average gross yields: 6.6% apartments, 4.9% villas and townhouses.","Renewal increases are capped by the DLD Rental Index. Q1 2026: 118,385 new leases and 135,607 renewals worth Dh32.2bn."],
+   src:["ktRent","abRentCalc","ktQ1Rent","dldRent"],
+   india:"Mumbai average gross yield 4.3% (ANAROCK, Q2 2026, from the main data bank).",
+   risk:"Yields above are gross. Service charges, vacancy and management fees cut them; falling rents cut them further."},
+  {cat:"S",name:"Golden Visa through property",where:"DLD and GDRFA",band:[5,10],
+   facts:["DLD lists a minimum purchase value of AED 2M for the 10-year residency route.","Mortgaged property is accepted subject to bank documentation.","DLD and GDRFA are moving Golden, Retiree and Property residency services into one system."],
+   src:["abGV","abGVunify"],
+   india:"AED 2M is about ₹4.9 crore at ₹24/AED [VERIFY rate]: the price of a good Powai or Hebbal flat.",
+   risk:"AED 2M exceeds one person's annual LRS. Confirm current conditions on DLD's own service page."},
+  {cat:"S",name:"DLD tokenisation, Phase II",where:"Dubai Land Department with VARA",band:[0,1],
+   facts:["Phase II enables resale of tokenised property from 20 Feb 2026, about 7.8 million tokens, inside a controlled pilot.","The pilot runs on the Prypco Mint platform with Dubai's Virtual Assets Regulatory Authority."],
+   src:["dmoToken","natToken"],
+   india:"SEBI's small and medium REIT rules vs Dubai's title-backed tokens.",
+   risk:"[VERIFY with a CA: whether an India resident can buy property tokens under LRS rules.] Pilot scale only."}
 ];
 const PERSONAS=[
   {k:"T",name:"Bengaluru tech founder",bd:[2,5],goal:"Dollar-linked asset after an ESOP or exit; wants hands-off rent.",av:"B"},
-  {k:"F",name:"Surat business family",bd:[5,10],goal:"Pooled family LRS, legacy asset, maybe a Golden Visa for the next generation.",av:"S"},
+  {k:"F",name:"Surat business family",bd:[5,10],goal:"Pooled family LRS, a legacy asset, maybe a Golden Visa for the next generation.",av:"S"},
   {k:"H",name:"Mumbai HNI with three flats",bd:[2,10],goal:"Tired of 3-4% gross yields; wants better income on the next crore.",av:"M"},
-  {k:"D",name:"Delhi doctor couple",bd:[1,2],goal:"First buy outside India; two LRS limits; cautious.",av:"D"},
+  {k:"D",name:"Delhi doctor couple",bd:[1,2],goal:"First buy outside India; two LRS limits; cautious after the war headlines.",av:"D"},
   {k:"P",name:"Pune IT director",bd:[1,2],goal:"Kids may study abroad; wants a foothold in a dirham asset.",av:"P"},
-  {k:"A",name:"Indian wealth advisor",bd:[1,10],goal:"Needs a straight answer before pitching Dubai to clients.",av:"W"}
+  {k:"A",name:"Indian wealth advisor",bd:[1,10],goal:"Needs a straight, sourced answer before pitching Dubai to clients.",av:"W"}
 ];
 const QUESTIONS=[
-  ["All-in cost in ₹","What will this actually cost me in rupees, with DLD, agent fees and the live rate?"],
+  ["All-in cost in ₹","What will this actually cost me in rupees, with DLD fees, agent fees and the live rate?"],
   ["Cash timing","When does money leave India: does the payment plan fit my LRS years and the 20% TCS?"],
   ["The Indian equivalent","What would the same money buy in my own city, and which is the better asset?"],
-  ["Who rents it","Who is the tenant here, and what is a realistic net yield after service charges?"],
+  ["Who rents it","Who is the tenant here, and what is a realistic net yield now that rents are easing?"],
   ["Exit","Who buys this from me in five years, and how deep is the resale market?"],
+  ["Buy now or wait","Prices are falling: is this a better entry point, or should I wait?"],
+  ["War risk","How exposed is this to the regional conflict, and what would protect me?"],
   ["Golden Visa","Does this purchase get my family residency, and on what conditions?"],
-  ["What could go wrong","What is the honest downside, and how would a careful buyer protect themselves?"],
   ["Tax back home","How are rent and capital gains from this taxed in India, and what must I report?"],
   ["Trust","Is the developer and escrow solid, and how do I check from India?"]
 ];
 const ANGLES=["The number nobody quotes","Myth vs reality","Side-by-side with a surprising winner","What insiders know","Contrarian take, one fact as proof","Hidden cost or hidden rule","Follow the money","Then vs now","The mistake smart people make","One deal, decoded","Who is buying, who is selling","Ranking or league table"];
 const FMT=["LinkedIn post","Carousel","Reel hook","X thread","Data card","WhatsApp explainer"];
-const SOURCES=[
-  ["Cresco Real Estate: Dubai new launches 2026","https://crescorealestate.ae/dubai-new-launches-2026/"],
-  ["RHK Properties: Emaar, DAMAC, Sobha 2026 launches","https://rhkproperties.com/blog/new-property-launches-dubai-emaar-damac-sobha"],
-  ["Engel & Völkers: Top developers in Dubai 2026","https://www.engelvoelkers.com/ae/en/resources/top-10-real-estate-developers-in-dubai"],
-  ["The Luxury Playbook: Dubai projects to watch in 2026","https://theluxuryplaybook.com/dubai-property-projects-to-watch-in-2026/"],
-  ["Off-plan Properties: Palm Jebel Ali 2026","https://off-planproperties.ae/palm-jebel-ali/"],
-  ["Wikipedia: Dubai Islands","https://en.wikipedia.org/wiki/Dubai_Islands"],
-  ["Zeyad Eid: Dubai South investor review 2026","https://zeyadeid.com/off-plan-project-reviews/dubai-south-properties/"],
-  ["Offplan Insider: Dubai off-plan projects 2026","https://offplaninsider.com/areas/dubai/"],
-  ["Khaleej Times: Metro stations could lift land values 15-30%","https://www.khaleejtimes.com/property/new-dubai-metro-stations-to-lift-land-values-rta"],
-  ["Khaleej Times: Blue Line rents in 9 communities","https://www.khaleejtimes.com/business/property/dubai-metro-blue-line-rents-in-9-communities-jump-up-to-43-percent"],
-  ["Property Finder: Metro extensions Dubai","https://www.propertyfinder.ae/blog/metro-extensions-dubai/"],
-  ["Gulf News: Blue Line and Mirdif, Silicon Oasis, Academic City","https://gulfnews.com/business/property/how-dubai-metro-blue-line-still-fuels-real-estate-rush-in-mirdif-silicon-oasis-academic-city-1.500197940"],
-  ["Business Standard: Sunteck enters Dubai","https://www.business-standard.com/amp/companies/news/sunteck-realty-enters-dubai-s-market-with-ultra-luxury-project-pipeline-125112400822_1.html"],
-  ["Enterprise: Sunteck's US$1.2bn Downtown project","https://enterpriseam.com/mena-india/2025/11/26/sunteck-realty-makes-uae-debut-with-usd-1-2-bn-downtown-dubai-project/"],
-  ["Gulf News: Why Indian developers are expanding into the UAE","https://gulfnews.com/business/property/why-indian-property-developers-are-expanding-into-the-uae-1.500385150"],
-  ["Editorji: Indian buyers remain Dubai's largest international group","https://www.editorji.com/amp/business-news/indian-investors-drive-dubai-real-estate-1780034268532"],
-  ["The Week: Indian buyers over 14% of major developers' sales","https://www.theweek.in/news/middle-east/2026/08/04/uae-real-estate-boom-indian-buyers-account-for-over-14percent-of-major-developers-sales.html"],
-  ["BNW Developments: India 14.38% of H1 business","https://bnw.ae/en/news/bnw-developments-plans-10000-homes-uae"],
-  ["Branford Properties: Indian investors lead Dubai 2026","https://branfordproperties.ae/real-estate/indian-investors-dubai-property-2026/"],
-  ["Janus Hermes: Golden Visa through property 2026","https://janushermes.com/blog/uae-golden-visa-property-2026"],
-  ["Real Intel: Golden Visa 2026 investor guide","https://realintel.ae/blog/dubai-golden-visa-property-investment-2026"],
-  ["Nex Consultants: Dubai real estate laws 2026","https://nexconsultants.com/dubai-real-estate-laws-latest-dld-rera-updates/"],
-  ["Khaleej Times: Prices could drop up to 15% (Fitch)","https://www.khaleejtimes.com/business/property/dubai-property-prices-to-drop-after-peak"],
-  ["Real Estate Club Dubai: Handover slippage 2026","https://realestateclubdubai.com/blog/market-analysis/dubai-handover-slippage-2026-only-43-percent-delivered"]
-];
 
 /* ---------- App ---------- */
 const $=id=>document.getElementById(id);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const overlap=(b,p)=>!b||(b[0]<=p[1]&&p[0]<=b[1]);
+const link=k=>{const s=S[k];return`<a class="${s.t}" href="${s.u}" target="_blank" rel="noopener"><i>${TL[s.t]}</i>${s.l}</a>`};
 let cat="All",per="All",count=5,batch=[];
 const dateStr=new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
 
+$("pulse").innerHTML=PULSE.map(p=>`<div class="tile"><div class="n ${p.w?"w":""}">${p.n}</div><div class="l">${p.l}</div><div class="s"><a href="${S[p.s].u}" target="_blank" rel="noopener">${S[p.s].l}</a></div></div>`).join("");
 $("seg").innerHTML=["All",...Object.keys(CATS)].map(k=>`<button data-k="${k}" class="${k==="All"?"on":""}">${k==="All"?"All":CATS[k].name}</button>`).join("");
 $("pseg").innerHTML=["All",...PERSONAS.map(p=>p.k)].map(k=>`<button data-k="${k}" class="${k==="All"?"on":""}">${k==="All"?"Any":PERSONAS.find(p=>p.k===k).name}</button>`).join("");
 const segClick=(el,set)=>e=>{const k=e.target.dataset.k;if(!k)return;set(k);[...el.children].forEach(x=>x.classList.toggle("on",x.dataset.k===k))};
@@ -311,29 +385,28 @@ $("pseg").onclick=segClick($("pseg"),k=>per=k);
 $("minus").onclick=()=>{count=Math.max(1,count-1);$("count").value=count};
 $("plus").onclick=()=>{count=Math.min(10,count+1);$("count").value=count};
 
-$("cats").innerHTML=Object.entries(CATS).map(([k,c])=>`<div class="cbox" style="--c:${c.c}"><h3><span>${k}</span> · ${c.name}</h3><ul>${DEVS.filter(d=>d.cat===k).map(d=>`<li><b>${d.name}</b><br>${d.fact}</li>`).join("")}</ul></div>`).join("");
+$("cats").innerHTML=Object.entries(CATS).map(([k,c])=>`<div class="cbox" style="--c:${c.c}"><h3><span>${k}</span> · ${c.name}</h3><ul>${DEVS.filter(d=>d.cat===k).map(d=>`<li><b>${d.name}</b><br>${d.facts[0]}</li>`).join("")}</ul></div>`).join("");
 $("personas").innerHTML=PERSONAS.map(p=>`<div class="pc"><h4>${p.name}</h4><div class="bd">₹${p.bd[0]}-${p.bd[1]} crore</div>${p.goal}</div>`).join("");
 $("qs").innerHTML=QUESTIONS.map(q=>`<div><b>${q[0]}</b>${q[1]}</div>`).join("");
-$("src").innerHTML=SOURCES.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></li>`).join("");
+$("src").innerHTML=Object.values(S).map(s=>`<li><i>${TL[s.t]}</i> · <a href="${s.u}" target="_blank" rel="noopener">${s.l}</a></li>`).join("");
 
 function make(dev,usedQ){
   const pool=per==="All"?PERSONAS.filter(p=>overlap(dev.band,p.bd)):PERSONAS.filter(p=>p.k===per);
-  const p=pick(pool.length?pool:PERSONAS);
+  const p=pick(pool.length?pool:PERSONAS.filter(p=>p.k==="A"));
   const qs=QUESTIONS.filter(q=>!usedQ||!usedQ.has(q[0]));
   const q=pick(qs.length?qs:QUESTIONS);
   return{dev,p,q,fit:overlap(dev.band,p.bd),angle:pick(ANGLES),fmt:pick(FMT)};
 }
 function roll(){
-  const pool=DEVS.filter(d=>cat==="All"||d.cat===cat);
-  const devs=shuffle(pool);const usedQ=new Set();
-  batch=[];for(let i=0;i<Math.min(count,devs.length);i++){const it=make(devs[i%devs.length],usedQ);usedQ.add(it.q[0]);batch.push(it)}
+  const devs=shuffle(DEVS.filter(d=>cat==="All"||d.cat===cat));const usedQ=new Set();
+  batch=[];for(let i=0;i<Math.min(count,devs.length);i++){const it=make(devs[i],usedQ);usedQ.add(it.q[0]);batch.push(it)}
   render();
 }
 function render(){
   $("out").innerHTML=batch.map((b,i)=>{const d=b.dev,c=CATS[d.cat];return`
   <article class="card" style="--c:${c.c};animation-delay:${i*70}ms">
     <div class="head"><div class="cat">${c.name}</div><h3>${d.name}</h3><div class="where">${d.where}</div></div>
-    <div class="fact">${d.fact}<em>Source: ${d.src}</em></div>
+    <div class="fact"><ul>${d.facts.map(f=>`<li>${f}</li>`).join("")}</ul><div class="srcs">${d.src.map(link).join("")}</div></div>
     <div class="vs"><span class="w">India lens</span><span>${d.india}</span></div>
     <div class="who"><div class="av">${b.p.av}</div><div><b>${b.p.name} · ₹${b.p.bd[0]}-${b.p.bd[1]} cr</b><span>${b.p.goal}</span></div></div>
     <div class="body">
@@ -353,22 +426,27 @@ $("out").onclick=e=>{
   batch[i]=make(pool.length?pick(pool):batch[i].dev);render();
 };
 
-const BRIEF=`You are a content strategist and former business journalist writing for Invest Dubai Today, an India-based platform. The reader lives in India (not an NRI) and is weighing a Dubai property purchase funded under LRS. Each idea takes one real Dubai development or market signal and answers one specific question an Indian investor would ask about it, measured against something familiar in India.`;
-const RULES=`Rules:
-- Use only the facts given or ones you can source. Never invent prices, deals, names or quotes. Mark anything unconfirmed [VERIFY: what to check]; anything older than six months [VERIFY: update].
-- Many supplied figures come from broker or marketing blogs. Confirm against DLD, RERA, the developer or primary reporting before treating them as fact.
+const BRIEF=`You are a content strategist and former business journalist writing for Invest Dubai Today, an India-based platform. The reader lives in India (not an NRI) and is weighing a Dubai property purchase funded under LRS. Each idea takes one real Dubai development or market signal and answers one specific question an Indian investor would ask about it, measured against something familiar in India. 2026 context: a record Q1, then a sharp slowdown after the regional conflict began; prices and rents are easing. Be honest about that.`;
+const RULES=`Source rules:
+- Use only: Dubai Land Department, Dubai Media Office, WAM, RTA and other UAE government sources; DXBinteract; reputed news outlets (Reuters, Bloomberg, Zawya news, Arabian Business, The National, Khaleej Times, Gulf News, AGBI, Business Standard, Economic Times, Mint).
+- Do not use broker or developer blogs, press releases, sponsored content or listing-portal marketing pages.
+- Industry figures (Cavendish Maxwell, Knight Frank, S&P, Fitch, Anarock, Savills) must name both the firm and the outlet that reported them.
+- Nationality shares of buyers are estimates; DLD does not publish them. Say so.
+- Never invent prices, deals, names or quotes. Mark anything unconfirmed [VERIFY: what to check]; anything older than six months [VERIFY: update].
+Writing rules:
 - Name the risk on every idea and show how a careful buyer manages it. Credit India's strengths honestly.
 - Money in rupees: all-in cost (DLD 4%, agent and registration fees), AED to INR at the live rate [VERIFY rate].
 - LRS: USD 250,000 per person per financial year; 20% TCS above ₹10 lakh, adjustable at ITR. If the budget exceeds one person's limit, say how (pooled family limits or several years).
-- Golden Visa threshold AED 2M; state conditions and [VERIFY] the Feb 2026 changes.
 - No "guaranteed", "risk-free", "best investment". No em dashes. Net over gross.
 - Banned words: unlock, game-changer, delve, landscape, navigate, elevate, seamless, robust, leverage, journey, realm, testament, revolutionize.`;
-const SPEC=`For each idea give: 1) Hook (max 12 words) 2) Sub-line (max 15 words) 3) The development and the India comparison 4) The answer to the investor's question in two or three sentences 5) The risk and how to manage it 6) Proof points with sources or [VERIFY] 7) Format 8) CTA (one line).`;
+const SPEC=`For each idea give: 1) Hook (max 12 words) 2) Sub-line (max 15 words) 3) The development and the India comparison 4) The answer to the investor's question in two or three sentences 5) The risk and how to manage it 6) Proof points, each with outlet and date 7) Format 8) CTA (one line).`;
 function prompt(items){
   const lines=items.map((b,i)=>`${i+1}. Development: ${b.dev.name} (${b.dev.where})
-   Facts (refresh before use): ${b.dev.fact} Source: ${b.dev.src}
+   Facts (refresh before use):
+${b.dev.facts.map(f=>"   - "+f).join("\n")}
+   Sources: ${b.dev.src.map(k=>`${S[k].l} <${S[k].u}>`).join("; ")}
    India lens: ${b.dev.india}
-   Investor: ${b.p.name}, budget ₹${b.p.bd[0]}-${b.p.bd[1]} crore all-in. ${b.p.goal}${b.dev.band&&!b.fit?" (Budget stretch: this development sits outside their range, so address that directly or swap the investor.)":""}
+   Investor: ${b.p.name}, budget ₹${b.p.bd[0]}-${b.p.bd[1]} crore all-in. ${b.p.goal}${b.dev.band&&!b.fit?" (Budget stretch: this sits outside their range, so address that directly.)":""}
    Their question (${b.q[0]}): ${b.q[1]}
    Risk to name: ${b.dev.risk}
    Angle: ${b.angle} | Format: ${b.fmt}`).join("\n");
